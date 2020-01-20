@@ -14,6 +14,10 @@
 		4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77D23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld */; };
 		4C23B78123D6060D007CAA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B78023D6060D007CAA55 /* Assets.xcassets */; };
 		4C23B78423D6060D007CAA55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B78223D6060D007CAA55 /* LaunchScreen.storyboard */; };
+		4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */; };
+		4C23B78F23D608D6007CAA55 /* TapLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B78D23D608D6007CAA55 /* TapLatencyViewController.xib */; };
+		4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79223D6097E007CAA55 /* LALogging.swift */; };
+		4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79523D60EC1007CAA55 /* LATouch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		4C23B78023D6060D007CAA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C23B78323D6060D007CAA55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C23B78523D6060D007CAA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapLatencyViewController.swift; sourceTree = "<group>"; };
+		4C23B78D23D608D6007CAA55 /* TapLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapLatencyViewController.xib; sourceTree = "<group>"; };
+		4C23B79223D6097E007CAA55 /* LALogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LALogging.swift; sourceTree = "<group>"; };
+		4C23B79523D60EC1007CAA55 /* LATouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LATouch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,10 @@
 		4C23B77323D6060B007CAA55 /* LaTAR iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4C23B79B23D612B8007CAA55 /* Extensions */,
+				4C23B79423D60EB4007CAA55 /* Data Models */,
+				4C23B79023D60951007CAA55 /* Comm */,
+				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C23B77423D6060B007CAA55 /* AppDelegate.swift */,
 				4C23B77623D6060B007CAA55 /* SceneDelegate.swift */,
 				4C23B77823D6060B007CAA55 /* ViewController.swift */,
@@ -68,6 +80,38 @@
 				4C23B77D23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld */,
 			);
 			path = "LaTAR iOS";
+			sourceTree = "<group>";
+		};
+		4C23B78B23D608B0007CAA55 /* Tap Latency */ = {
+			isa = PBXGroup;
+			children = (
+				4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */,
+				4C23B78D23D608D6007CAA55 /* TapLatencyViewController.xib */,
+			);
+			path = "Tap Latency";
+			sourceTree = "<group>";
+		};
+		4C23B79023D60951007CAA55 /* Comm */ = {
+			isa = PBXGroup;
+			children = (
+				4C23B79223D6097E007CAA55 /* LALogging.swift */,
+			);
+			path = Comm;
+			sourceTree = "<group>";
+		};
+		4C23B79423D60EB4007CAA55 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				4C23B79523D60EC1007CAA55 /* LATouch.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		4C23B79B23D612B8007CAA55 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C23B78423D6060D007CAA55 /* LaunchScreen.storyboard in Resources */,
+				4C23B78F23D608D6007CAA55 /* TapLatencyViewController.xib in Resources */,
 				4C23B78123D6060D007CAA55 /* Assets.xcassets in Resources */,
 				4C23B77C23D6060B007CAA55 /* Main.storyboard in Resources */,
 			);
@@ -142,7 +187,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */,
+				4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */,
 				4C23B77923D6060B007CAA55 /* ViewController.swift in Sources */,
+				4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */,
+				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
 				4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */,
 				4C23B77723D6060B007CAA55 /* SceneDelegate.swift in Sources */,
 			);
