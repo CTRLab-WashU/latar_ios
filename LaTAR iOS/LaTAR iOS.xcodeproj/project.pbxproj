@@ -3,37 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77423D6060B007CAA55 /* AppDelegate.swift */; };
 		4C23B77723D6060B007CAA55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77623D6060B007CAA55 /* SceneDelegate.swift */; };
-		4C23B77923D6060B007CAA55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77823D6060B007CAA55 /* ViewController.swift */; };
+		4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77823D6060B007CAA55 /* HomeViewController.swift */; };
 		4C23B77C23D6060B007CAA55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B77A23D6060B007CAA55 /* Main.storyboard */; };
 		4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77D23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld */; };
 		4C23B78123D6060D007CAA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B78023D6060D007CAA55 /* Assets.xcassets */; };
 		4C23B78423D6060D007CAA55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B78223D6060D007CAA55 /* LaunchScreen.storyboard */; };
 		4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */; };
-		4C23B78F23D608D6007CAA55 /* TapLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B78D23D608D6007CAA55 /* TapLatencyViewController.xib */; };
 		4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79223D6097E007CAA55 /* LALogging.swift */; };
 		4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79523D60EC1007CAA55 /* LATouch.swift */; };
+		4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79D23D61CE5007CAA55 /* SocketRequest.swift */; };
+		4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79E23D61CE5007CAA55 /* LaTARSocket.swift */; };
+		4C23B7A423D61CE6007CAA55 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B79F23D61CE5007CAA55 /* SocketResponse.swift */; };
+		4C23B7A523D61CE6007CAA55 /* SocketEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7A023D61CE6007CAA55 /* SocketEnums.swift */; };
+		4C23B7B123D61F9E007CAA55 /* Socket in Frameworks */ = {isa = PBXBuildFile; productRef = 4C23B7B023D61F9E007CAA55 /* Socket */; };
+		4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B423D63078007CAA55 /* Data+Hex.swift */; };
+		4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C23B77123D6060B007CAA55 /* LaTAR iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LaTAR iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C23B77423D6060B007CAA55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C23B77623D6060B007CAA55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C23B77823D6060B007CAA55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C23B77823D6060B007CAA55 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4C23B77B23D6060B007CAA55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C23B77E23D6060B007CAA55 /* LaTAR_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LaTAR_iOS.xcdatamodel; sourceTree = "<group>"; };
 		4C23B78023D6060D007CAA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C23B78323D6060D007CAA55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C23B78523D6060D007CAA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapLatencyViewController.swift; sourceTree = "<group>"; };
-		4C23B78D23D608D6007CAA55 /* TapLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapLatencyViewController.xib; sourceTree = "<group>"; };
 		4C23B79223D6097E007CAA55 /* LALogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LALogging.swift; sourceTree = "<group>"; };
 		4C23B79523D60EC1007CAA55 /* LATouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LATouch.swift; sourceTree = "<group>"; };
+		4C23B79D23D61CE5007CAA55 /* SocketRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketRequest.swift; sourceTree = "<group>"; };
+		4C23B79E23D61CE5007CAA55 /* LaTARSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaTARSocket.swift; sourceTree = "<group>"; };
+		4C23B79F23D61CE5007CAA55 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
+		4C23B7A023D61CE6007CAA55 /* SocketEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnums.swift; sourceTree = "<group>"; };
+		4C23B7B423D63078007CAA55 /* Data+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Hex.swift"; sourceTree = "<group>"; };
+		4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LADeviceInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C23B7B123D61F9E007CAA55 /* Socket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +84,7 @@
 				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C23B77423D6060B007CAA55 /* AppDelegate.swift */,
 				4C23B77623D6060B007CAA55 /* SceneDelegate.swift */,
-				4C23B77823D6060B007CAA55 /* ViewController.swift */,
+				4C23B77823D6060B007CAA55 /* HomeViewController.swift */,
 				4C23B77A23D6060B007CAA55 /* Main.storyboard */,
 				4C23B78023D6060D007CAA55 /* Assets.xcassets */,
 				4C23B78223D6060D007CAA55 /* LaunchScreen.storyboard */,
@@ -86,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */,
-				4C23B78D23D608D6007CAA55 /* TapLatencyViewController.xib */,
 			);
 			path = "Tap Latency";
 			sourceTree = "<group>";
@@ -94,6 +105,10 @@
 		4C23B79023D60951007CAA55 /* Comm */ = {
 			isa = PBXGroup;
 			children = (
+				4C23B79E23D61CE5007CAA55 /* LaTARSocket.swift */,
+				4C23B7A023D61CE6007CAA55 /* SocketEnums.swift */,
+				4C23B79D23D61CE5007CAA55 /* SocketRequest.swift */,
+				4C23B79F23D61CE5007CAA55 /* SocketResponse.swift */,
 				4C23B79223D6097E007CAA55 /* LALogging.swift */,
 			);
 			path = Comm;
@@ -102,6 +117,7 @@
 		4C23B79423D60EB4007CAA55 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */,
 				4C23B79523D60EC1007CAA55 /* LATouch.swift */,
 			);
 			path = "Data Models";
@@ -110,6 +126,7 @@
 		4C23B79B23D612B8007CAA55 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4C23B7B423D63078007CAA55 /* Data+Hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -130,6 +147,9 @@
 			dependencies = (
 			);
 			name = "LaTAR iOS";
+			packageProductDependencies = (
+				4C23B7B023D61F9E007CAA55 /* Socket */,
+			);
 			productName = "LaTAR iOS";
 			productReference = 4C23B77123D6060B007CAA55 /* LaTAR iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +178,9 @@
 				Base,
 			);
 			mainGroup = 4C23B76823D6060B007CAA55;
+			packageReferences = (
+				4C23B7AF23D61F9E007CAA55 /* XCRemoteSwiftPackageReference "BlueSocket" */,
+			);
 			productRefGroup = 4C23B77223D6060B007CAA55 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -173,7 +196,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C23B78423D6060D007CAA55 /* LaunchScreen.storyboard in Resources */,
-				4C23B78F23D608D6007CAA55 /* TapLatencyViewController.xib in Resources */,
 				4C23B78123D6060D007CAA55 /* Assets.xcassets in Resources */,
 				4C23B77C23D6060B007CAA55 /* Main.storyboard in Resources */,
 			);
@@ -188,9 +210,15 @@
 			files = (
 				4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */,
 				4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */,
-				4C23B77923D6060B007CAA55 /* ViewController.swift in Sources */,
+				4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */,
 				4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */,
+				4C23B7A523D61CE6007CAA55 /* SocketEnums.swift in Sources */,
+				4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */,
+				4C23B7A423D61CE6007CAA55 /* SocketResponse.swift in Sources */,
 				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
+				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
+				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
+				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,
 				4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */,
 				4C23B77723D6060B007CAA55 /* SceneDelegate.swift in Sources */,
 			);
@@ -338,6 +366,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9RQ4636JA2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+				);
 				INFOPLIST_FILE = "LaTAR iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,6 +391,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9RQ4636JA2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
+				);
 				INFOPLIST_FILE = "LaTAR iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -390,6 +432,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4C23B7AF23D61F9E007CAA55 /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/IBM-Swift/BlueSocket.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.52;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4C23B7B023D61F9E007CAA55 /* Socket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C23B7AF23D61F9E007CAA55 /* XCRemoteSwiftPackageReference "BlueSocket" */;
+			productName = Socket;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4C23B77D23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld */ = {

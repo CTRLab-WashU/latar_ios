@@ -10,6 +10,7 @@ import Foundation
 
 class LALogging: NSObject
 {
+    static public let loggedNotification = Notification.Name("loggedNotification");
     
     static public let sharedInstance = LALogging();
     
@@ -92,5 +93,6 @@ public func HMLog(_ s: String, quiet:Bool = false)
     }
     
     LALogging.sharedInstance.logString(s);
+    NotificationCenter.default.post(name: LALogging.loggedNotification, object: nil, userInfo: ["log": s]);
 }
 

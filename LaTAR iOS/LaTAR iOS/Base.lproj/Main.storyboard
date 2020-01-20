@@ -7,51 +7,86 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="LaTAR_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bej-cF-p2A">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <connections>
-                                    <segue destination="hXt-r1-477" kind="embed" id="jT2-Zi-n6U"/>
-                                </connections>
-                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LaTAR BOT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpU-l7-kpG">
+                                <rect key="frame" x="0.0" y="124" width="414" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="4Dg-8M-TUP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ver. 0.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jq-jU-n0F">
+                                <rect key="frame" x="0.0" y="165" width="414" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="YTu-51-FyV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F5-6u-jQZ">
+                                <rect key="frame" x="8" y="199" width="398" height="655"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bej-cF-p2A" secondAttribute="trailing" id="EBC-PV-Y4F"/>
-                            <constraint firstItem="bej-cF-p2A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GCm-a0-vMS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bej-cF-p2A" secondAttribute="bottom" id="HEb-KF-z5M"/>
-                            <constraint firstItem="bej-cF-p2A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Rqf-T8-a7u"/>
+                            <constraint firstItem="HpU-l7-kpG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gmn-zt-18j"/>
+                            <constraint firstItem="9Jq-jU-n0F" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="I8V-ta-Dog"/>
+                            <constraint firstItem="9Jq-jU-n0F" firstAttribute="top" secondItem="HpU-l7-kpG" secondAttribute="bottom" id="R3B-6I-hVh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HpU-l7-kpG" secondAttribute="trailing" id="Vsk-R7-DlS"/>
+                            <constraint firstItem="1F5-6u-jQZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="fWH-wC-s3r"/>
+                            <constraint firstItem="1F5-6u-jQZ" firstAttribute="top" secondItem="9Jq-jU-n0F" secondAttribute="bottom" constant="16" id="jIc-Zb-HCr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1F5-6u-jQZ" secondAttribute="trailing" constant="8" id="jQB-Yw-Xat"/>
+                            <constraint firstItem="9Jq-jU-n0F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mjW-Jg-mjy"/>
+                            <constraint firstItem="HpU-l7-kpG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="qAp-0K-vVx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1F5-6u-jQZ" secondAttribute="bottom" constant="8" id="uO0-Si-Mwz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XkE-0U-WqX"/>
+                    <connections>
+                        <outlet property="textLog" destination="1F5-6u-jQZ" id="Wuo-im-g1s"/>
+                        <outlet property="versionLabel" destination="9Jq-jU-n0F" id="oiq-uS-wbz"/>
+                        <segue destination="APz-4B-vIq" kind="showDetail" identifier="showTapLatency" destinationCreationSelector="showTapLatency:" id="gzZ-lW-ELE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="138"/>
         </scene>
-        <!--Tap Latency View Controller-->
-        <scene sceneID="L7b-Vk-5sQ">
+        <!--Tap Latency-->
+        <scene sceneID="Ii0-6c-C8Y">
             <objects>
-                <viewController id="hXt-r1-477" customClass="TapLatencyViewController" customModule="LaTAR_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="NhH-Xn-Ejy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                <viewController title="Tap Latency" id="APz-4B-vIq" customClass="TapLatencyViewController" customModule="LaTAR_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xm3-q3-g6K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="3mv-XI-E27"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Tap Latency" id="W2W-w0-O12">
+                        <barButtonItem key="rightBarButtonItem" title="Options" id="ivF-79-Pt6"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="view" destination="NhH-Xn-Ejy" id="Aol-7u-8Gf"/>
+                        <outlet property="view" destination="xm3-q3-g6K" id="KjO-Ce-zoZ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OZP-2j-a7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E53-US-g2L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="828"/>
+            <point key="canvasLocation" x="1088" y="138"/>
         </scene>
     </scenes>
 </document>
