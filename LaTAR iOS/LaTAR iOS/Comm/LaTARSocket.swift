@@ -18,8 +18,9 @@ import Socket
 class LaTARSocket {
     
     // MARK: Varaibles
-    static public var shared:LaTARSocket!;
+    static public var shared:LaTARSocket = LaTARSocket();
     
+    var encoder = JSONEncoder();
     
     var socket: Socket? = nil
     var host: String? = "192.168.191.153"
@@ -32,11 +33,7 @@ class LaTARSocket {
     var awaitingResponse:Array<SocketRequest> = Array();    // queue of SocketRequests waiting for a response
     
     var verbose:Bool = true;
-    
-    public static func initializeShared()
-    {
-        LaTARSocket.shared = LaTARSocket();
-    }
+    var dontActuallyDoStuff:Bool = false;
     
     init() {
         self.initSocket(host: "192.168.191.153");
@@ -45,14 +42,20 @@ class LaTARSocket {
     
     deinit {
         self.socket?.close();
+        
     }
     
     func initSocket(host: String) {
+        if self.dontActuallyDoStuff
+        {
+            return;
+        }
+        
         do {
             self.host = host
             self.socket = try Socket.create()
             HMLog("Created socket for host \(host) port \(self.port)");
-            connect()
+            try connect()
         }
         catch {
             HMLog("Error creating socket: \(error)")
@@ -64,6 +67,7 @@ class LaTARSocket {
         }
         catch {
             HMLog("Error setting socket to non-blocking mode: \(error)")
+            return;
         }
         
         // clear any queues that we may have before now.
@@ -71,28 +75,25 @@ class LaTARSocket {
         self.awaitingResponse.removeAll();
         
         DispatchQueue.global(qos: .background).async {
-            while(true) {
+            while(self.socket?.isConnected ?? false) {
                 self.receive()
                 self.sendNextEvent()
             }
         }
+        
     }
     
     // Connects the socket
-    func connect() {
-        do {
-            try self.socket?.connect(to: host!, port: port)
-        }
-        catch {
-            HMLog("Error connecting to socket: \(error)")
-            return
-        }
+    func connect() throws {
+        try self.socket?.connect(to: host!, port: port)
         HMLog("Connected to socket.")
     }
     
     // Adds the request to the send queue.
     func enqueue(request:SocketRequest)
     {
+        HMLog("Enqueued request:");
+        HMLog(request.description);
         self.sendQueue.append(request);
     }
     
@@ -283,6 +284,34 @@ class LaTARSocket {
     }
     
     
+    //MARK: Sending Data
+    
+    
+    func acknowledgeCommand(_ cmd:cmd_byte)
+    {
+        let request = SocketRequest.createRequest(cmd: cmd, ctl: .ack, body: nil, comment: nil, response_handler: nil);
+        self.enqueue(request: request);
+    }
+    
+    func sendTouch(_ touch:LATouch)
+    {
+        do
+        {
+            let jsonData:Data = try self.encoder.encode(touch);
+            guard let json:String = String(data:jsonData, encoding:.utf8) else {
+                HMLog("Could not convert json data to string");
+                return;
+            }
+            
+            let request = SocketRequest.createRequest(cmd: .TAP_DATA, ctl: .enq, body: json, comment: nil, response_handler: nil);
+            self.enqueue(request: request);
+            
+        }
+        catch
+        {
+            HMLog("Error trying to send LATouch: \(error)");
+        }
+    }
     
     // Converts Data to JSON
     func dataToJson(data: Data) -> Any? {
