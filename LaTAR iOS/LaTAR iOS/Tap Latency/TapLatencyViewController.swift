@@ -10,15 +10,26 @@ import UIKit
 
 class TapLatencyViewController: UIViewController {
 
+    public var count:Int = 0;
+    public var interval:Int = 0;
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        NotificationCenter.default.addObserver(self, selector: #selector(handleStart(notification:)), name: tapLatenceyStartNotification, object: nil);
     }
 
-
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated);
+        NotificationCenter.default.removeObserver(self);
+    }
+    
+    
+    @objc func handleStart(notification: Notification)
+    {
+        // TODO: do we need to do anything when we start?
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let e = event
         {

@@ -24,6 +24,9 @@
 		4C23B7B123D61F9E007CAA55 /* Socket in Frameworks */ = {isa = PBXBuildFile; productRef = 4C23B7B023D61F9E007CAA55 /* Socket */; };
 		4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B423D63078007CAA55 /* Data+Hex.swift */; };
 		4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */; };
+		4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */; };
+		4CFB280223D8E3AF00D1EE5A /* TapLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */; };
+		4CFB280423D8E3C900D1EE5A /* DisplayLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,9 @@
 		4C23B7A023D61CE6007CAA55 /* SocketEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnums.swift; sourceTree = "<group>"; };
 		4C23B7B423D63078007CAA55 /* Data+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Hex.swift"; sourceTree = "<group>"; };
 		4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LADeviceInfo.swift; sourceTree = "<group>"; };
+		4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLatencyViewController.swift; sourceTree = "<group>"; };
+		4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapLatencyViewController.xib; sourceTree = "<group>"; };
+		4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayLatencyViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 		4C23B77323D6060B007CAA55 /* LaTAR iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4C2A6BC023D8B69C00D45466 /* Screen Latency */,
 				4C23B79B23D612B8007CAA55 /* Extensions */,
 				4C23B79423D60EB4007CAA55 /* Data Models */,
 				4C23B79023D60951007CAA55 /* Comm */,
@@ -98,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */,
+				4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */,
 			);
 			path = "Tap Latency";
 			sourceTree = "<group>";
@@ -129,6 +137,15 @@
 				4C23B7B423D63078007CAA55 /* Data+Hex.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C2A6BC023D8B69C00D45466 /* Screen Latency */ = {
+			isa = PBXGroup;
+			children = (
+				4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */,
+				4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */,
+			);
+			path = "Screen Latency";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +213,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C23B78423D6060D007CAA55 /* LaunchScreen.storyboard in Resources */,
+				4CFB280223D8E3AF00D1EE5A /* TapLatencyViewController.xib in Resources */,
 				4C23B78123D6060D007CAA55 /* Assets.xcassets in Resources */,
+				4CFB280423D8E3C900D1EE5A /* DisplayLatencyViewController.xib in Resources */,
 				4C23B77C23D6060B007CAA55 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +230,7 @@
 				4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */,
 				4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */,
 				4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */,
+				4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */,
 				4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */,
 				4C23B7A523D61CE6007CAA55 /* SocketEnums.swift in Sources */,
 				4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */,
