@@ -60,33 +60,11 @@
                     <connections>
                         <outlet property="textLog" destination="1F5-6u-jQZ" id="Wuo-im-g1s"/>
                         <outlet property="versionLabel" destination="9Jq-jU-n0F" id="oiq-uS-wbz"/>
-                        <segue destination="APz-4B-vIq" kind="showDetail" identifier="showTapLatency" destinationCreationSelector="showTapLatency:" id="gzZ-lW-ELE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="138"/>
-        </scene>
-        <!--Tap Latency-->
-        <scene sceneID="Ii0-6c-C8Y">
-            <objects>
-                <viewController title="Tap Latency" id="APz-4B-vIq" customClass="TapLatencyViewController" customModule="LaTAR_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xm3-q3-g6K">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="3mv-XI-E27"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Tap Latency" id="W2W-w0-O12">
-                        <barButtonItem key="rightBarButtonItem" title="Options" id="ivF-79-Pt6"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="view" destination="xm3-q3-g6K" id="KjO-Ce-zoZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E53-US-g2L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1088" y="138"/>
         </scene>
     </scenes>
 </document>
