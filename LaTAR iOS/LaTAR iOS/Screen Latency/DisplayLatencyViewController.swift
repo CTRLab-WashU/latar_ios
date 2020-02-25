@@ -9,10 +9,12 @@
 import UIKit
 
 class DisplayLatencyViewController: UIViewController {
-
-    public var count:Int = 0;
-    public var currentIteration:Int = 0;
-    public var interval:Int = 0;
+    
+    public var count:Int = 0;       // number of times to change color
+    public var interval:Int = 0;    // interval in ms between color changes
+    public var testIndex:Int = 0;   // current index (once this reaches count, we're done)
+    public var color:Int = 1;       // current color (1 = white, 0 = black)
+    
     public var timer: DispatchSourceTimer!
     
     override func viewDidAppear(_ animated: Bool) {
@@ -21,7 +23,7 @@ class DisplayLatencyViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleStart(notification:)), name: displayLatenceyStartNotification, object: nil);
         
-        LaTARSocket.shared.acknowledgeCommand(.DISPLAY_SETUP);
+        LaTARSocket.shared.acknowledgeCommand(.DISPLAY_START);
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,8 +44,10 @@ class DisplayLatencyViewController: UIViewController {
     {
         
         let queue = DispatchQueue(label: "com.latar.timer", qos: .userInteractive)
+        let intervalSeconds = (Double(self.interval) / 1000);
         timer = DispatchSource.makeTimerSource(flags: .strict, queue: queue)
-        timer.schedule(deadline: .now(), repeating: Double(self.interval / 1000), leeway: .nanoseconds(0))
+        
+        timer.schedule(deadline: .now() + intervalSeconds, repeating: intervalSeconds, leeway: .nanoseconds(0))
         timer.setEventHandler {
             self.updateDisplay();
         
@@ -53,27 +57,31 @@ class DisplayLatencyViewController: UIViewController {
     
     @objc func updateDisplay()
     {
-        self.currentIteration += 1;
-        if(self.currentIteration >= self.count)
+        self.performSelector(onMainThread: #selector(toggleScreenColor), with: nil, waitUntilDone: true);
+        self.testIndex += 1;
+        if(self.testIndex >= self.count)
         {
             self.timer.cancel();
             return;
         }
-        
-        self.performSelector(onMainThread: #selector(toggleScreenColor), with: nil, waitUntilDone: true);
-        //TODO: send update?
-        
     }
     
     @objc func toggleScreenColor()
     {
-        if self.view.backgroundColor == UIColor.black
+        let time = DeviceClock.getCurrentTime();
+        let screenAction:LAScreenAction = LAScreenAction(index: self.testIndex, color: self.color, timestamp: time);
+        
+        if self.color == 0
         {
             self.view.backgroundColor = UIColor.white;
+            self.color = 1;
         }
         else
         {
             self.view.backgroundColor = UIColor.black;
+            self.color = 0;
         }
+        
+        LaTARSocket.shared.sendScreenAction(screenAction);
     }
 }

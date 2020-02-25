@@ -9,44 +9,45 @@
 import Foundation
 import UIKit
 
-public struct LATouch: Codable, CustomStringConvertible
+public struct LATouch: Codable
 {
-    public var timestamp:TimeInterval;
-    public var touchPhase:String;
-    public var touchLocation:CGPoint;
-    public var touchRadius:CGFloat;
-    public var touchRadiusTolerance:CGFloat;
+    /*
+     
+     public class TapLatencyData {
+         public int index;
+         public int action;
+         public String actionName;
+         public long actionTime;
+         public long callbackTime;
+         public float touchMajor;
+         public float touchMinor;
+     }
+
+
+     */
+    public var index:Int;
+    public var action:Int;
+    public var actionName: String;
+    public var actionTime: UInt64;
+    public var callbackTime: UInt64;
+    public var touchMajor: CGFloat;
+    public var touchMinor: CGFloat;
+    
+//    public var timestamp:TimeInterval;
+//    public var touchPhase:String;
+//    public var touchLocation:CGPoint;
+//    public var touchRadius:CGFloat;
+//    public var touchRadiusTolerance:CGFloat;
 
     
-    init(timestamp: TimeInterval, touchPhase: UITouch.Phase, touchLocation: CGPoint, touchRadius: CGFloat, touchRadiusTolerance: CGFloat)
+    init(index: Int, timestamp: UInt64, touchPhase: UITouch.Phase, touchRadius: CGFloat)
     {
-        self.timestamp = timestamp;
-        self.touchPhase = "";
-        self.touchLocation = touchLocation;
-        self.touchRadius = touchRadius;
-        self.touchRadiusTolerance = touchRadiusTolerance;
-        self.touchPhase = self.phaseString(touchPhase);
-    }
-    
-    public var description: String {
-        
-        return String(format: "timestamp: %f\tlocation: %f,%f\tphase:%@\tradius:%f", timestamp, touchLocation.x, touchLocation.y, touchPhase, touchRadius, touchRadiusTolerance);
-    }
-    
-    public func phaseString(_ phase:UITouch.Phase) -> String {
-        switch phase {
-        case .began:
-            return "Touch Began";
-        case .ended:
-            return "Touch Ended";
-        case .moved:
-            return "Touch Moved";
-        case .cancelled:
-            return "Touch Cancelled";
-        case .stationary:
-            return "Touch Stationary";
-        @unknown default:
-            return "Touch Unknown";
-        }
+        self.callbackTime = timestamp;
+        self.actionTime = self.callbackTime;
+        self.index = index;
+        self.touchMajor = touchRadius * 2;
+        self.touchMinor = touchRadius * 2;
+        self.action = (touchPhase == .began ? 0 : 1);
+        self.actionName = touchPhase == .began ? "ACTION_DOWN" : "ACTION_UP";
     }
 }

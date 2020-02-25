@@ -21,13 +21,16 @@ class LaTARSocket {
     static public var shared:LaTARSocket = LaTARSocket();
     
     var encoder = JSONEncoder();
+    var decoder = JSONDecoder();
     
-    var socket: Socket? = nil
-    var host: String? = "192.168.191.153"
+    var socket: Socket? = nil;
+    var host: String? = nil;
     let port: Int32 = 4032
+    var isConnected:Bool = false;
     
     var currMessage: Data = Data()
     var localBuffer: Data = Data()
+    
     
     var sendQueue:Array<SocketRequest> = Array();       // queue of SocketRequests waiting to be sent
     var awaitingResponse:Array<SocketRequest> = Array();    // queue of SocketRequests waiting for a response
@@ -36,13 +39,24 @@ class LaTARSocket {
     var dontActuallyDoStuff:Bool = false;
     
     init() {
-        self.initSocket(host: "192.168.191.153");
+        
         
     }
     
     deinit {
         self.socket?.close();
         
+    }
+    
+    static func initShared()
+    {
+        LaTARSocket.shared = LaTARSocket();
+    }
+    
+    func closeSocket()
+    {
+        self.isConnected = false;
+        self.socket?.close();
     }
     
     func initSocket(host: String) {
@@ -73,7 +87,7 @@ class LaTARSocket {
         // clear any queues that we may have before now.
         self.sendQueue.removeAll();
         self.awaitingResponse.removeAll();
-        
+        self.isConnected = true;
         DispatchQueue.global(qos: .background).async {
             while(self.socket?.isConnected ?? false) {
                 self.receive()
@@ -92,8 +106,8 @@ class LaTARSocket {
     // Adds the request to the send queue.
     func enqueue(request:SocketRequest)
     {
-        HMLog("Enqueued request:");
-        HMLog(request.description);
+//        HMLog("Enqueued request:");
+//        HMLog(request.description);
         self.sendQueue.append(request);
     }
     
@@ -126,7 +140,7 @@ class LaTARSocket {
         
         if self.send(event: data) > 0
         {
-            HMLog("Sent request: \(request)");
+//            HMLog("Sent request: \(request)");
             sendQueue.removeFirst();
             if request.response_handler != nil
             {
@@ -178,7 +192,7 @@ class LaTARSocket {
     
     func handleResponse(data: Data) {
         guard let response = SocketResponse.createResponse(from: data) else { return; }
-        HMLog("Received response: \(response)");
+//        HMLog("Received response: \(response)");
         
         // Let's see if there are any requests awaiting this response.
         if let index = self.awaitingResponse.firstIndex(where: { (request) -> Bool in return request.cmd == response.cmd; })
@@ -204,22 +218,14 @@ class LaTARSocket {
             case .DEVICE_IDENTIFY:
                 self.handleDeviceIdentify(response);
                 return;
+                
+            case .DEVICE_ERROR:
+                return;
             case .RESET:
                 self.handleReset(response);
                 return;
                 
-            case .CALIBRATION_SETUP:
-                return;
-            case .CALIBRATION_DISPLAY:
-                return;
-            case .CALIBRATION_TOUCH:
-                return;
-            case .CALIBRATION_TEARDOWN:
-                return;
-                
-            case .DISPLAY_SETUP:
-                NotificationCenter.default.post(Notification(name:displayLatenceySetupNotification, object:response));
-                return;
+         
             case .DISPLAY_START:
                 NotificationCenter.default.post(Notification(name:displayLatenceyStartNotification, object:response));
                 return;
@@ -228,24 +234,26 @@ class LaTARSocket {
             case .DISPLAY_STOP:
                 NotificationCenter.default.post(Notification(name:displayLatenceyStopNotification, object:response));
                 return;
-            case .DISPLAY_TEARDOWN:
-                NotificationCenter.default.post(Notification(name:displayLatenceyTeardownNotification, object:response));
-                return;
-                
-            case .TAP_SETUP:
-                NotificationCenter.default.post(Notification(name:tapLatenceySetupNotification, object:response));
-                return;
+        
+        
             case .TAP_START:
-                NotificationCenter.default.post(Notification(name:tapLatenceyStartNotification, object:response));
+                guard let response_data:Data = response.response_data else { return; }
+                
+                do{
+                    let displayParams:Dictionary<String, Int> = try self.decoder.decode(Dictionary<String, Int>.self, from: response_data)
+                    NotificationCenter.default.post(Notification(name:tapLatenceyStartNotification, object:displayParams));
+                }
+                catch
+                {
+                    HMLog("Error trying to decode response data: \(error)");
+                }
                 return;
             case .TAP_DATA:
                 return;
             case .TAP_STOP:
                 NotificationCenter.default.post(Notification(name:tapLatenceyStopNotification, object:response));
                 return;
-            case .TAP_TEARDOWN:
-                NotificationCenter.default.post(Notification(name:tapLatenceyTeardownNotification, object:response));
-                return;
+            
             }
 
         }
@@ -258,11 +266,35 @@ class LaTARSocket {
     
     func handleClockSync(_ response:SocketResponse)
     {
+        DeviceClock.zero();
+        let request = SocketRequest.createRequest(cmd: response.cmd, ctl: .ack, body: nil, comment: nil, response_handler: nil);
+        self.enqueue(request: request);
         
     }
     
     func handleClockUpdate(_ response:SocketResponse)
     {
+        do
+        {
+            var body:Dictionary<String, UInt64> = Dictionary();
+            body["timestamp"] = DeviceClock.getCurrentTime();
+        
+            let jsonData:Data = try self.encoder.encode(body);
+            guard let json:String = String(data:jsonData, encoding:.utf8) else {
+                HMLog("Could not convert json data to string");
+                return;
+            }
+            
+           let request = SocketRequest.createRequest(cmd: response.cmd, ctl: .ack, body: json, comment: nil, response_handler: nil);
+            self.enqueue(request: request);
+            
+        }
+        catch
+        {
+            HMLog("Error trying to send LATouch: \(error)");
+        }
+        
+        
         
     }
     
@@ -313,12 +345,24 @@ class LaTARSocket {
         }
     }
     
-    // Converts Data to JSON
-    func dataToJson(data: Data) -> Any? {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        print(json!)
-        return json
+    func sendScreenAction(_ screenAction:LAScreenAction)
+    {
+        do
+        {
+            let jsonData:Data = try self.encoder.encode(screenAction);
+            guard let json:String = String(data:jsonData, encoding:.utf8) else {
+                HMLog("Could not convert json data to string");
+                return;
+            }
+            
+            let request = SocketRequest.createRequest(cmd: .DISPLAY_DATA, ctl: .enq, body: json, comment: nil, response_handler: nil);
+            self.enqueue(request: request);
+            
+        }
+        catch
+        {
+            HMLog("Error trying to send LAScreenAction: \(error)");
+        }
     }
-    
     
 }

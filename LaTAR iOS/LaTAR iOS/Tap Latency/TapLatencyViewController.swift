@@ -16,6 +16,8 @@ class TapLatencyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         NotificationCenter.default.addObserver(self, selector: #selector(handleStart(notification:)), name: tapLatenceyStartNotification, object: nil);
+        
+        LaTARSocket.shared.acknowledgeCommand(.TAP_START);
     }
 
     
@@ -34,6 +36,7 @@ class TapLatencyViewController: UIViewController {
         if let e = event
         {
             self.processEvent(e);
+            count += 1;
         }
     }
     
@@ -49,11 +52,10 @@ class TapLatencyViewController: UIViewController {
         let eventTime = event.timestamp;
         
         guard let touch = event.allTouches?.first else { return; }
+        let offsetTime = DeviceClock.convertToOffsetTime(eventTime);
+        let t = LATouch(index: self.count, timestamp: offsetTime, touchPhase: touch.phase, touchRadius: touch.majorRadius);
         
-        let t = LATouch(timestamp: eventTime, touchPhase: touch.phase, touchLocation: touch.location(in: self.view), touchRadius: touch.majorRadius, touchRadiusTolerance: touch.majorRadiusTolerance);
-        
-        
-        HMLog("\(t)");
+        LaTARSocket.shared.sendTouch(t);
     }
     
 }

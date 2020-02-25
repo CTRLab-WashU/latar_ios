@@ -30,21 +30,19 @@ enum cmd_byte: UInt8
     case CLOCK_UPDATE           = 0x43;
     case DEVICE_INFO            = 0x44;
     case DEVICE_IDENTIFY        = 0x45;
-    case RESET                  = 0x46;
-    case CALIBRATION_SETUP      = 0x47;
-    case CALIBRATION_DISPLAY    = 0x48;
-    case CALIBRATION_TOUCH      = 0x49;
-    case CALIBRATION_TEARDOWN   = 0x4B;
-    case DISPLAY_SETUP          = 0x4C;
+    
+    case DEVICE_ERROR           = 0x46;
+    case RESET                  = 0x49;
+    
     case DISPLAY_START          = 0x4D;
     case DISPLAY_DATA           = 0x4E;
     case DISPLAY_STOP           = 0x4F;
-    case DISPLAY_TEARDOWN       = 0x50;
-    case TAP_SETUP              = 0x51;
-    case TAP_START              = 0x52;
-    case TAP_DATA               = 0x53;
-    case TAP_STOP               = 0x54;
-    case TAP_TEARDOWN           = 0x55;
+    
+    
+    case TAP_START              = 0x51;
+    case TAP_DATA               = 0x52;
+    case TAP_STOP               = 0x55;
+
     
     static func fromString(_ str:String) -> cmd_byte?
     {
@@ -59,15 +57,13 @@ enum cmd_byte: UInt8
 
 
 // NotificationCenter notifications
-let tapLatenceySetupNotification:Notification.Name = Notification.Name(rawValue: "tapLatencySetup");
+
 let tapLatenceyStartNotification:Notification.Name = Notification.Name(rawValue: "tapLatencyStart");
 let tapLatenceyStopNotification:Notification.Name = Notification.Name(rawValue: "tapLatencyStop");
-let tapLatenceyTeardownNotification:Notification.Name = Notification.Name(rawValue: "tapLatencyTeardown");
 
-let displayLatenceySetupNotification:Notification.Name = Notification.Name(rawValue: "displayLatencySetup");
 let displayLatenceyStartNotification:Notification.Name = Notification.Name(rawValue: "displayLatencyStart");
 let displayLatenceyStopNotification:Notification.Name = Notification.Name(rawValue: "displayLatencyStop");
-let displayLatenceyTeardownNotification:Notification.Name = Notification.Name(rawValue: "displayLatencyTeardown");
+
 
 
 

@@ -23,18 +23,22 @@ class HomeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(displayLog(notification:)),
                                                name: LALogging.loggedNotification, object: nil);
+        
         NotificationCenter.default.addObserver(self, selector: #selector(setupTapLatency(notification:)),
-                                               name: tapLatenceySetupNotification, object: nil);
+                                               name: tapLatenceyStartNotification, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(teardownTapLatency(notification:)),
-                                               name: tapLatenceyTeardownNotification, object: nil);
+                                               name: tapLatenceyStopNotification, object: nil);
+        
         NotificationCenter.default.addObserver(self, selector: #selector(setupDisplayLatency(notification:)),
-                                               name: displayLatenceySetupNotification, object: nil);
+                                               name: displayLatenceyStartNotification, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(teardownDisplayLatency(notification:)),
-                                               name: displayLatenceyTeardownNotification, object: nil);
+                                               name: displayLatenceyStopNotification, object: nil);
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
+        
     }
     
     @objc func setupTapLatency(notification:Notification)
@@ -44,19 +48,25 @@ class HomeViewController: UIViewController {
         
         vc.modalPresentationStyle = .fullScreen;
         self.present(vc, animated: true) {
-            LaTARSocket.shared.acknowledgeCommand(.TAP_SETUP);
+            
         }
     }
     
     
     @objc func setupDisplayLatency(notification:Notification)
     {
+        guard let displayParams:Dictionary<String, Int> = notification.object as! Dictionary<String, Int>,
+            let count:Int = displayParams["count"],
+            let interval:Int = displayParams["interval"]
+            else { return; }
         
         let vc = DisplayLatencyViewController.init(nibName: "DisplayLatencyViewController", bundle: nil);
+        vc.count = count;
+        vc.interval = interval;
         
         vc.modalPresentationStyle = .fullScreen;
         self.present(vc, animated: true) {
-            LaTARSocket.shared.acknowledgeCommand(.DISPLAY_SETUP);
+            
         }
     }
     
@@ -64,7 +74,7 @@ class HomeViewController: UIViewController {
     @objc func teardownTapLatency(notification:Notification)
     {
         self.dismiss(animated: true) {
-            LaTARSocket.shared.acknowledgeCommand(.TAP_TEARDOWN);
+            LaTARSocket.shared.acknowledgeCommand(.TAP_STOP);
         }
     }
     
@@ -73,7 +83,7 @@ class HomeViewController: UIViewController {
     {
         
         self.dismiss(animated: true) {
-            LaTARSocket.shared.acknowledgeCommand(.DISPLAY_TEARDOWN);
+            LaTARSocket.shared.acknowledgeCommand(.DISPLAY_STOP);
         }
     }
     
@@ -90,5 +100,19 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBAction func ConnectPressed(_ sender: UIButton) {
+        
+        if LaTARSocket.shared.isConnected
+        {
+            LaTARSocket.shared.closeSocket();
+            sender.setTitle("Connect", for: .normal);
+        }
+        else
+        {
+            LaTARSocket.shared.initSocket(host: "192.168.191.106");
+            sender.setTitle("Disconnect", for: .normal);
+        }
+    
+    }
 }
 
