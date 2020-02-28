@@ -229,15 +229,16 @@ class LaTARSocket {
          
             case .DISPLAY_START:
                 
-                guard let response_data:Data = response.response_data else { return; }
+				guard let response_data:Data = response.body?.data(using: .utf8) else { return; }
                 
                 do{
                     let displayParams:Dictionary<String, Int> = try self.decoder.decode(Dictionary<String, Int>.self, from: response_data)
+					
                     NotificationCenter.default.post(Notification(name:displayLatenceyStartNotification, object:displayParams));
                 }
                 catch
                 {
-                    HMLog("Error trying to decode response data: \(error)");
+					HMLog("Error trying to decode response data: \(error) \(response)");
                 }
                 
                 return;

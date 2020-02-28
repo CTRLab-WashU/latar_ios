@@ -68,7 +68,8 @@ class HomeViewController: UIViewController {
             
             vc.modalPresentationStyle = .fullScreen;
             self.present(vc, animated: true) {
-                
+				//The tap test never started because the notification came in before the controller could observe it.
+				vc.setupTimer()
             }
         }
     }

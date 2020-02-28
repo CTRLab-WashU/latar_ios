@@ -66,7 +66,8 @@ class DisplayLatencyViewController: UIViewController {
         self.testIndex += 1;
         if(self.testIndex >= self.count)
         {
-            self.timer.cancel();
+			NotificationCenter.default.post(Notification(name:displayLatenceyStopNotification, object:nil));
+			self.timer.cancel();
             return;
         }
     }
