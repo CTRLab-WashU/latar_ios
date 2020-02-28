@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77423D6060B007CAA55 /* AppDelegate.swift */; };
-		4C23B77723D6060B007CAA55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77623D6060B007CAA55 /* SceneDelegate.swift */; };
 		4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77823D6060B007CAA55 /* HomeViewController.swift */; };
 		4C23B77C23D6060B007CAA55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B77A23D6060B007CAA55 /* Main.storyboard */; };
 		4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77D23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld */; };
@@ -25,6 +24,8 @@
 		4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B423D63078007CAA55 /* Data+Hex.swift */; };
 		4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */; };
 		4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */; };
+		4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */; };
+		4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637ECF24058F7700C139F9 /* DeviceClock.swift */; };
 		4CFB280223D8E3AF00D1EE5A /* TapLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */; };
 		4CFB280423D8E3C900D1EE5A /* DisplayLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */; };
 /* End PBXBuildFile section */
@@ -32,7 +33,6 @@
 /* Begin PBXFileReference section */
 		4C23B77123D6060B007CAA55 /* LaTAR iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LaTAR iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C23B77423D6060B007CAA55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C23B77623D6060B007CAA55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4C23B77823D6060B007CAA55 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4C23B77B23D6060B007CAA55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C23B77E23D6060B007CAA55 /* LaTAR_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LaTAR_iOS.xcdatamodel; sourceTree = "<group>"; };
@@ -49,6 +49,8 @@
 		4C23B7B423D63078007CAA55 /* Data+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Hex.swift"; sourceTree = "<group>"; };
 		4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LADeviceInfo.swift; sourceTree = "<group>"; };
 		4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLatencyViewController.swift; sourceTree = "<group>"; };
+		4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAScreenAction.swift; sourceTree = "<group>"; };
+		4C637ECF24058F7700C139F9 /* DeviceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceClock.swift; sourceTree = "<group>"; };
 		4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapLatencyViewController.xib; sourceTree = "<group>"; };
 		4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayLatencyViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +92,6 @@
 				4C23B79023D60951007CAA55 /* Comm */,
 				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C23B77423D6060B007CAA55 /* AppDelegate.swift */,
-				4C23B77623D6060B007CAA55 /* SceneDelegate.swift */,
 				4C23B77823D6060B007CAA55 /* HomeViewController.swift */,
 				4C23B77A23D6060B007CAA55 /* Main.storyboard */,
 				4C23B78023D6060D007CAA55 /* Assets.xcassets */,
@@ -118,6 +119,7 @@
 				4C23B79D23D61CE5007CAA55 /* SocketRequest.swift */,
 				4C23B79F23D61CE5007CAA55 /* SocketResponse.swift */,
 				4C23B79223D6097E007CAA55 /* LALogging.swift */,
+				4C637ECF24058F7700C139F9 /* DeviceClock.swift */,
 			);
 			path = Comm;
 			sourceTree = "<group>";
@@ -127,6 +129,7 @@
 			children = (
 				4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */,
 				4C23B79523D60EC1007CAA55 /* LATouch.swift */,
+				4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -231,16 +234,17 @@
 				4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */,
 				4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */,
 				4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */,
+				4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */,
 				4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */,
 				4C23B7A523D61CE6007CAA55 /* SocketEnums.swift in Sources */,
 				4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */,
+				4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */,
 				4C23B7A423D61CE6007CAA55 /* SocketResponse.swift in Sources */,
 				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
 				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
 				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
 				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,
 				4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */,
-				4C23B77723D6060B007CAA55 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -370,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -385,7 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9RQ4636JA2;
+				DEVELOPMENT_TEAM = GT94FFC924;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",
@@ -410,7 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9RQ4636JA2;
+				DEVELOPMENT_TEAM = GT94FFC924;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LaTAR\\ iOS/vendor",

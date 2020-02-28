@@ -16,7 +16,7 @@ public class DeviceClock
     
     public static func zero()
     {
-        let time:UInt64 = DeviceClock.getCurrentTime();
+        let time:UInt64 = UInt64( ProcessInfo.processInfo.systemUptime * 1000000);
         DeviceClock.timeOffset = time;
     }
     
@@ -28,7 +28,7 @@ public class DeviceClock
     
     public static func getCurrentTime() -> UInt64
     {
-        let utime:UInt64 = UInt64( ProcessInfo.processInfo.systemUptime * 1000000);
-        return utime - DeviceClock.timeOffset;
+        return DeviceClock.convertToOffsetTime(ProcessInfo.processInfo.systemUptime);
+        
     }
 }

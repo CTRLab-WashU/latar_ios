@@ -41,19 +41,20 @@ class TapLatencyViewController: UIViewController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let e = event
-        {
-            self.processEvent(e);
-        }
+//        if let e = event
+//        {
+//            self.processEvent(e);
+//        }
     }
     
     func processEvent(_ event:UIEvent)
     {
-        let eventTime = event.timestamp;
-        
         guard let touch = event.allTouches?.first else { return; }
-        let offsetTime = DeviceClock.convertToOffsetTime(eventTime);
-        let t = LATouch(index: self.count, timestamp: offsetTime, touchPhase: touch.phase, touchRadius: touch.majorRadius);
+        
+        let actionTime = DeviceClock.convertToOffsetTime(event.timestamp);
+        let callbackTime = DeviceClock.getCurrentTime();
+        
+        let t = LATouch(index: self.count, actionTime: actionTime, callbackTime: callbackTime, touchPhase: touch.phase, touchRadius: touch.majorRadius);
         
         LaTARSocket.shared.sendTouch(t);
     }

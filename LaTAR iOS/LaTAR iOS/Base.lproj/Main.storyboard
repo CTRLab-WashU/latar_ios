@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,11 +13,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="LaTAR_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LaTAR BOT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpU-l7-kpG">
-                                <rect key="frame" x="0.0" y="124" width="414" height="41"/>
+                                <rect key="frame" x="0.0" y="80" width="320" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="4Dg-8M-TUP"/>
                                 </constraints>
@@ -25,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ver. 0.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jq-jU-n0F">
-                                <rect key="frame" x="0.0" y="165" width="414" height="18"/>
+                                <rect key="frame" x="0.0" y="121" width="320" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="YTu-51-FyV"/>
                                 </constraints>
@@ -34,17 +35,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F5-6u-jQZ">
-                                <rect key="frame" x="8" y="199" width="398" height="385"/>
+                                <rect key="frame" x="8" y="155" width="304" height="223"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="385" id="v9x-Ri-zO8"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="500" id="v9x-Ri-zO8"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92b-WR-gLL">
-                                <rect key="frame" x="167" y="638" width="80" height="40"/>
+                                <rect key="frame" x="120" y="432" width="80" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Nen-At-K5u"/>
                                     <constraint firstAttribute="width" constant="80" id="d5s-QF-9Ze"/>
@@ -68,7 +69,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1F5-6u-jQZ" secondAttribute="trailing" constant="8" id="jQB-Yw-Xat"/>
                             <constraint firstItem="9Jq-jU-n0F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mjW-Jg-mjy"/>
                             <constraint firstItem="HpU-l7-kpG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="qAp-0K-vVx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="92b-WR-gLL" secondAttribute="bottom" priority="998" constant="8" id="wJ4-qs-W8X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="92b-WR-gLL" secondAttribute="bottom" priority="999" constant="8" id="wJ4-qs-W8X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -80,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="137.94642857142856"/>
+            <point key="canvasLocation" x="-387" y="7"/>
         </scene>
     </scenes>
 </document>

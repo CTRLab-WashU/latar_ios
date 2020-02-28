@@ -57,6 +57,7 @@ class LaTARSocket {
     {
         self.isConnected = false;
         self.socket?.close();
+        HMLog("Disconnected socket.");
     }
     
     func initSocket(host: String) {
@@ -227,7 +228,18 @@ class LaTARSocket {
                 
          
             case .DISPLAY_START:
-                NotificationCenter.default.post(Notification(name:displayLatenceyStartNotification, object:response));
+                
+                guard let response_data:Data = response.response_data else { return; }
+                
+                do{
+                    let displayParams:Dictionary<String, Int> = try self.decoder.decode(Dictionary<String, Int>.self, from: response_data)
+                    NotificationCenter.default.post(Notification(name:displayLatenceyStartNotification, object:displayParams));
+                }
+                catch
+                {
+                    HMLog("Error trying to decode response data: \(error)");
+                }
+                
                 return;
             case .DISPLAY_DATA:
                 return;
@@ -235,18 +247,8 @@ class LaTARSocket {
                 NotificationCenter.default.post(Notification(name:displayLatenceyStopNotification, object:response));
                 return;
         
-        
             case .TAP_START:
-                guard let response_data:Data = response.response_data else { return; }
-                
-                do{
-                    let displayParams:Dictionary<String, Int> = try self.decoder.decode(Dictionary<String, Int>.self, from: response_data)
-                    NotificationCenter.default.post(Notification(name:tapLatenceyStartNotification, object:displayParams));
-                }
-                catch
-                {
-                    HMLog("Error trying to decode response data: \(error)");
-                }
+                NotificationCenter.default.post(Notification(name:tapLatenceyStartNotification, object:response));
                 return;
             case .TAP_DATA:
                 return;
@@ -254,6 +256,8 @@ class LaTARSocket {
                 NotificationCenter.default.post(Notification(name:tapLatenceyStopNotification, object:response));
                 return;
             
+            case .CLOCK_DATA:
+                return;
             }
 
         }
@@ -278,7 +282,7 @@ class LaTARSocket {
         {
             var body:Dictionary<String, UInt64> = Dictionary();
             body["timestamp"] = DeviceClock.getCurrentTime();
-        
+            
             let jsonData:Data = try self.encoder.encode(body);
             guard let json:String = String(data:jsonData, encoding:.utf8) else {
                 HMLog("Could not convert json data to string");

@@ -11,28 +11,18 @@ import UIKit
 
 public struct LAScreenAction: Codable
 {
-    /*
-     
-     {
-       "callbackTime": 386995509706,
-       "color": 1,
-       "colorName": "WHITE",
-       "displayTime": 386995510556,
-       "index": 20
-     }
-     */
+    public var index:Int;               // 0-based count of how many touches there've been
+    public var color:Int;               // 0/1 => black/white
+    public var colorName: String;       // BLACK/WHITE
+    public var callbackTime: UInt64;    // microsecond time before the call to update screen color is made
+    public var displayTime: UInt64;     // microsecond time after the call to update screen color returns
     
-    public var index:Int;
-    public var color:Int;
-    public var colorName: String;
-    public var actionTime: UInt64;
-    public var callbackTime: UInt64;
     
-    init(index:Int, color:Int, timestamp:UInt64)
+    init(index:Int, color:Int, callbackTime:UInt64, displayTime:UInt64)
     {
         self.index = index;
-        self.callbackTime = timestamp;
-        self.actionTime = self.callbackTime;
+        self.callbackTime = callbackTime;
+        self.displayTime = displayTime;
         self.color = color;
         self.colorName = color == 1 ? "WHITE" : "BLACK";
     }

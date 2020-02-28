@@ -11,39 +11,19 @@ import UIKit
 
 public struct LATouch: Codable
 {
-    /*
-     
-     public class TapLatencyData {
-         public int index;
-         public int action;
-         public String actionName;
-         public long actionTime;
-         public long callbackTime;
-         public float touchMajor;
-         public float touchMinor;
-     }
-
-
-     */
-    public var index:Int;
-    public var action:Int;
-    public var actionName: String;
-    public var actionTime: UInt64;
-    public var callbackTime: UInt64;
-    public var touchMajor: CGFloat;
-    public var touchMinor: CGFloat;
+    public var index:Int;               // 0-based count of how many touches there've been
+    public var action:Int;              // 0/1 => down/up
+    public var actionName: String;      // ACTION_DOWN/ACTION_UP, depending on action
+    public var actionTime: UInt64;      // microsecond time from the UIEvent's timestamp
+    public var callbackTime: UInt64;    // microsecond time of ProcessInfo's systemUpTime, at the time that the touchesBegan/touchesEnded is called
+    public var touchMajor: CGFloat;     // touchRadius * 2
+    public var touchMinor: CGFloat;     // touchRadius * 2 (iOS doesn't provide more granular data than just one radius value)
     
-//    public var timestamp:TimeInterval;
-//    public var touchPhase:String;
-//    public var touchLocation:CGPoint;
-//    public var touchRadius:CGFloat;
-//    public var touchRadiusTolerance:CGFloat;
-
     
-    init(index: Int, timestamp: UInt64, touchPhase: UITouch.Phase, touchRadius: CGFloat)
+    init(index: Int, actionTime: UInt64, callbackTime:UInt64, touchPhase: UITouch.Phase, touchRadius: CGFloat)
     {
-        self.callbackTime = timestamp;
-        self.actionTime = self.callbackTime;
+        self.callbackTime = callbackTime;
+        self.actionTime = actionTime;
         self.index = index;
         self.touchMajor = touchRadius * 2;
         self.touchMinor = touchRadius * 2;
