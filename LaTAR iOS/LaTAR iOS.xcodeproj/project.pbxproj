@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1EE6552411687D000EBAC1 /* ClockUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1EE6542411687D000EBAC1 /* ClockUpdate.swift */; };
 		4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77423D6060B007CAA55 /* AppDelegate.swift */; };
 		4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B77823D6060B007CAA55 /* HomeViewController.swift */; };
 		4C23B77C23D6060B007CAA55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C23B77A23D6060B007CAA55 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C1EE6542411687D000EBAC1 /* ClockUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockUpdate.swift; sourceTree = "<group>"; };
 		4C23B77123D6060B007CAA55 /* LaTAR iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LaTAR iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C23B77423D6060B007CAA55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C23B77823D6060B007CAA55 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				4C23B79F23D61CE5007CAA55 /* SocketResponse.swift */,
 				4C23B79223D6097E007CAA55 /* LALogging.swift */,
 				4C637ECF24058F7700C139F9 /* DeviceClock.swift */,
+				4C1EE6542411687D000EBAC1 /* ClockUpdate.swift */,
 			);
 			path = Comm;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */,
 				4C23B7A423D61CE6007CAA55 /* SocketResponse.swift in Sources */,
 				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
+				4C1EE6552411687D000EBAC1 /* ClockUpdate.swift in Sources */,
 				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
 				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
 				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,

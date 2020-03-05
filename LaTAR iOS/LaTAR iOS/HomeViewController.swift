@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
-        
+        _ = LaTARSocket.shared;
     }
     
     @objc func setupTapLatency(notification:Notification)
@@ -110,6 +110,11 @@ class HomeViewController: UIViewController {
     
     @IBAction func ConnectPressed(_ sender: UIButton) {
         
+        if LaTARSocket.shared.udpAddress == nil
+        {
+            return;
+        }
+        
         if LaTARSocket.shared.isConnected
         {
             LaTARSocket.shared.closeSocket();
@@ -117,7 +122,7 @@ class HomeViewController: UIViewController {
         }
         else
         {
-            LaTARSocket.shared.initSocket(host: "192.168.191.153");
+            LaTARSocket.shared.setupTcp();
             sender.setTitle("Disconnect", for: .normal);
         }
     

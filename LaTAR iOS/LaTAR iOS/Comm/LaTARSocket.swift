@@ -23,10 +23,13 @@ class LaTARSocket {
     var encoder = JSONEncoder();
     var decoder = JSONDecoder();
     
-    var socket: Socket? = nil;
-    var host: String? = nil;
-    let port: Int32 = 4032
+    var tcpSocket: Socket? = nil;
+    var udpSocket: Socket? = nil;
+    let tcpPort: Int32 = 4032
+    let udpPort: Int32 = 4172;
     var isConnected:Bool = false;
+    var listenForUdp:Bool = true;
+    var udpAddress:Socket.Address? = nil;
     
     var currMessage: Data = Data()
     var localBuffer: Data = Data()
@@ -37,14 +40,16 @@ class LaTARSocket {
     
     var verbose:Bool = true;
     var dontActuallyDoStuff:Bool = false;
+    var clockUpdates:Array<ClockUpdate> = Array();
     
     init() {
-        
+        self.setupUdp();
         
     }
     
     deinit {
-        self.socket?.close();
+        self.tcpSocket?.close();
+        self.udpSocket?.close();
         
     }
     
@@ -56,41 +61,34 @@ class LaTARSocket {
     func closeSocket()
     {
         self.isConnected = false;
-        self.socket?.close();
+        self.tcpSocket?.close();
         HMLog("Disconnected socket.");
     }
     
-    func initSocket(host: String) {
+    func setupTcp() {
+        HMLog("Connecting");
         if self.dontActuallyDoStuff
         {
             return;
         }
+        guard let address = self.udpAddress, let (remoteHost, _) = Socket.hostnameAndPort(from: address) else { return; }
         
         do {
-            self.host = host
-            self.socket = try Socket.create()
-            HMLog("Created socket for host \(host) port \(self.port)");
-            try connect()
+            self.tcpSocket = try Socket.create()
+            try self.tcpSocket?.connect(to: remoteHost, port: self.tcpPort)
+            try self.tcpSocket?.setBlocking(mode: false)
         }
         catch {
             HMLog("Error creating socket: \(error)")
             return
         }
         
-        do {
-            try self.socket?.setBlocking(mode: false)
-        }
-        catch {
-            HMLog("Error setting socket to non-blocking mode: \(error)")
-            return;
-        }
-        
         // clear any queues that we may have before now.
         self.sendQueue.removeAll();
         self.awaitingResponse.removeAll();
         self.isConnected = true;
-        DispatchQueue.global(qos: .background).async {
-            while(self.socket?.isConnected ?? false) {
+        DispatchQueue.global(qos: .default).async {
+            while(self.tcpSocket?.isConnected ?? false) {
                 self.receive()
                 self.sendNextEvent()
             }
@@ -98,17 +96,28 @@ class LaTARSocket {
         
     }
     
-    // Connects the socket
-    func connect() throws {
-        try self.socket?.connect(to: host!, port: port)
-        HMLog("Connected to socket.")
+    func setupUdp()
+    {
+        do {
+            self.udpSocket = try Socket.create(family: .inet, type: .datagram, proto: .udp);
+            try self.udpSocket?.listen(on: Int(self.udpPort));
+        }
+        catch {
+            HMLog("Error creating socket: \(error)")
+            return
+        }
+        HMLog("Waiting to receive broadcast...");
+        DispatchQueue.global(qos: .default).async {
+            while(self.listenForUdp){
+                self.handleUdp();
+            }
+        }
+        
     }
     
     // Adds the request to the send queue.
     func enqueue(request:SocketRequest)
     {
-//        HMLog("Enqueued request:");
-//        HMLog(request.description);
         self.sendQueue.append(request);
     }
     
@@ -117,10 +126,10 @@ class LaTARSocket {
     
     func send(event: Data) -> Int {
         do {
-            let readOrWrite = try self.socket?.isReadableOrWritable(waitForever: false, timeout: 1000)
+            let readOrWrite = try self.tcpSocket?.isReadableOrWritable(waitForever: false, timeout: 1000)
             if readOrWrite?.writable == true
             {
-                if let result = try self.socket?.write(from: event)
+                if let result = try self.tcpSocket?.write(from: event)
                 {
                     return result;
                 }
@@ -159,10 +168,7 @@ class LaTARSocket {
         
         var received: Data = Data()
         do {
-            //try self.socket?.read(into: &received)
-            try _ = self.socket?.read(into: receivedPtr, bufSize: 1, truncate: true)
-            //print(receivedPtr.pointee)
-            //receivedPtr[0] = -1
+            try _ = self.tcpSocket?.read(into: receivedPtr, bufSize: 1, truncate: true)
             if (receivedPtr.pointee != 0) {
                 //print(UInt8(bitPattern: receivedPtr[0]))
                 received.append(UInt8(bitPattern: receivedPtr[0]))
@@ -207,9 +213,6 @@ class LaTARSocket {
             switch response.cmd
             {
                 
-            case .CLOCK_SYNC:
-                self.handleClockSync(response);
-                return;
             case .CLOCK_UPDATE:
                 self.handleClockUpdate(response);
                 return;
@@ -219,9 +222,7 @@ class LaTARSocket {
             case .DEVICE_IDENTIFY:
                 self.handleDeviceIdentify(response);
                 return;
-                
-            case .DEVICE_ERROR:
-                return;
+  
             case .RESET:
                 self.handleReset(response);
                 return;
@@ -256,8 +257,7 @@ class LaTARSocket {
             case .TAP_STOP:
                 NotificationCenter.default.post(Notification(name:tapLatenceyStopNotification, object:response));
                 return;
-            
-            case .CLOCK_DATA:
+            default:
                 return;
             }
 
@@ -269,22 +269,12 @@ class LaTARSocket {
     
     //MARK: Handling specific commands
     
-    func handleClockSync(_ response:SocketResponse)
-    {
-        DeviceClock.zero();
-        let request = SocketRequest.createRequest(cmd: response.cmd, ctl: .ack, body: nil, comment: nil, response_handler: nil);
-        self.enqueue(request: request);
-        
-    }
-    
     func handleClockUpdate(_ response:SocketResponse)
     {
+        HMLog("Sending Clock Update info");
         do
         {
-            var body:Dictionary<String, UInt64> = Dictionary();
-            body["timestamp"] = DeviceClock.getCurrentTime();
-            
-            let jsonData:Data = try self.encoder.encode(body);
+            let jsonData:Data = try self.encoder.encode(self.clockUpdates);
             guard let json:String = String(data:jsonData, encoding:.utf8) else {
                 HMLog("Could not convert json data to string");
                 return;
@@ -320,6 +310,52 @@ class LaTARSocket {
         
     }
     
+    
+    @objc func handleUdp()
+    {
+        
+        let receivedPtr = UnsafeMutablePointer<CChar>.allocate(capacity: 1)
+        receivedPtr.initialize(to: 0);
+        guard let socket = self.udpSocket else { return; }
+        var received: Data = Data()
+        do {
+            
+            let (_, addr) = try socket.readDatagram(into: &received)
+            guard let address = addr else { return; }
+            
+            if received.count == 0
+            {
+                return;
+            }
+            switch received[0]
+            {
+            case cmd_byte.BROADCAST.rawValue:
+                if self.udpAddress == nil
+                {
+                    self.udpAddress = address;
+                    HMLog("Received broadcast, ready to connect.");
+                }
+                break;
+            case cmd_byte.CLOCK_SYNC.rawValue:
+                DeviceClock.zero();
+                self.clockUpdates = Array();
+                try socket.write(from: received, to: address)
+                HMLog("Received clock sync");
+                break;
+            default:
+                let timestamp = DeviceClock.getCurrentTime();
+                try socket.write(from: received, to: address);
+                let update:ClockUpdate = ClockUpdate(timestamp: timestamp, index: Int(received[0]));
+                self.clockUpdates.append(update);
+                break;
+                
+            }
+        }
+        catch {
+          HMLog("Error reading data from socket: \(error)")
+          return
+        }
+    }
     
     //MARK: Sending Data
     

@@ -26,20 +26,18 @@ enum ctl_byte: UInt8
 
 enum cmd_byte: UInt8
 {
+    case BROADCAST              = 0x20;
     case CLOCK_SYNC             = 0x21;
     case CLOCK_UPDATE           = 0x22;
-    case CLOCK_DATA             = 0x23;
     
     case DEVICE_INFO            = 0x24;
     case DEVICE_IDENTIFY        = 0x25;
     
-    case DEVICE_ERROR           = 0x26;
-    case RESET                  = 0x27;
+    case RESET                  = 0x26;
     
     case DISPLAY_START          = 0x28;
     case DISPLAY_DATA           = 0x29;
     case DISPLAY_STOP           = 0x2A;
-    
     
     case TAP_START              = 0x2B;
     case TAP_DATA               = 0x2C;
