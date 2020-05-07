@@ -58,9 +58,10 @@ class DisplayLatencyViewController: UIViewController {
     @objc func updateDisplay()
     {
         let callbackTime = DeviceClock.getCurrentTime();
+        let currentColor = self.color;
         self.performSelector(onMainThread: #selector(toggleScreenColor), with: nil, waitUntilDone: true);
         let displayTime = DeviceClock.getCurrentTime();
-        let screenAction:LAScreenAction = LAScreenAction(index: self.testIndex, color: self.color, callbackTime: callbackTime, displayTime: displayTime);
+        let screenAction:LAScreenAction = LAScreenAction(index: self.testIndex, color: currentColor, callbackTime: callbackTime, displayTime: displayTime);
         LaTARSocket.shared.sendScreenAction(screenAction);
         
         self.testIndex += 1;
@@ -77,12 +78,12 @@ class DisplayLatencyViewController: UIViewController {
         
         if self.color == 0
         {
-            self.view.backgroundColor = UIColor.white;
+            self.view.backgroundColor = UIColor.black;
             self.color = 1;
         }
         else
         {
-            self.view.backgroundColor = UIColor.black;
+            self.view.backgroundColor = UIColor.white;
             self.color = 0;
         }
         

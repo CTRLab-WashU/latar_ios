@@ -36,7 +36,8 @@ public struct HardwareInfo: Codable
         self.brand = "Apple";
         self.manufacturer = "Apple";
         self.model = deviceIdentifier();
-        self.name = UIDevice.current.systemName;
+        self.name = deviceIdentifier().replacingOccurrences(of: ",", with: "_");
+        
     }
 }
 
@@ -48,7 +49,7 @@ public struct OSInfo: Codable
     public var securityPatch:String = "";
     
     init() {
-        self.name = "iOS";
+        self.name = UIDevice.current.systemName;
         self.release = UIDevice.current.systemVersion;
         self.sdk = "";
         self.securityPatch = "";
