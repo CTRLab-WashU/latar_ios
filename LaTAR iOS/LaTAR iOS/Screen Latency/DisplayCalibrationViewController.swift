@@ -59,7 +59,6 @@ class DisplayCalibrationViewController: LatarViewController {
     @objc func updateDisplay()
     {
         
-        HMLog("color: \(self.color)");
         self.performSelector(onMainThread: #selector(toggleScreenColor), with: nil, waitUntilDone: true);
         
         
