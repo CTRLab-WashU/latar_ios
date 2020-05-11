@@ -27,6 +27,11 @@
 		4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */; };
 		4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */; };
 		4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637ECF24058F7700C139F9 /* DeviceClock.swift */; };
+		4C882D6C2465C255007234DA /* LATouchCalibrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */; };
+		4CC0820824649A4800489D12 /* DisplayCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0820624649A4800489D12 /* DisplayCalibrationViewController.swift */; };
+		4CC0820924649A4800489D12 /* DisplayCalibrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0820724649A4800489D12 /* DisplayCalibrationViewController.xib */; };
+		4CC0820C24649A5700489D12 /* TouchCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0820A24649A5700489D12 /* TouchCalibrationViewController.swift */; };
+		4CC0820D24649A5700489D12 /* TouchCalibrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0820B24649A5700489D12 /* TouchCalibrationViewController.xib */; };
 		4CC0820F24649E1200489D12 /* LatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0820E24649E1200489D12 /* LatarViewController.swift */; };
 		4CFB280223D8E3AF00D1EE5A /* TapLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */; };
 		4CFB280423D8E3C900D1EE5A /* DisplayLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */; };
@@ -54,6 +59,11 @@
 		4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLatencyViewController.swift; sourceTree = "<group>"; };
 		4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAScreenAction.swift; sourceTree = "<group>"; };
 		4C637ECF24058F7700C139F9 /* DeviceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceClock.swift; sourceTree = "<group>"; };
+		4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LATouchCalibrationData.swift; sourceTree = "<group>"; };
+		4CC0820624649A4800489D12 /* DisplayCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCalibrationViewController.swift; sourceTree = "<group>"; };
+		4CC0820724649A4800489D12 /* DisplayCalibrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayCalibrationViewController.xib; sourceTree = "<group>"; };
+		4CC0820A24649A5700489D12 /* TouchCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchCalibrationViewController.swift; sourceTree = "<group>"; };
+		4CC0820B24649A5700489D12 /* TouchCalibrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TouchCalibrationViewController.xib; sourceTree = "<group>"; };
 		4CC0820E24649E1200489D12 /* LatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatarViewController.swift; sourceTree = "<group>"; };
 		4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapLatencyViewController.xib; sourceTree = "<group>"; };
 		4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayLatencyViewController.xib; sourceTree = "<group>"; };
@@ -112,6 +122,8 @@
 			children = (
 				4C23B78C23D608D6007CAA55 /* TapLatencyViewController.swift */,
 				4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */,
+				4CC0820A24649A5700489D12 /* TouchCalibrationViewController.swift */,
+				4CC0820B24649A5700489D12 /* TouchCalibrationViewController.xib */,
 			);
 			path = "Tap Latency";
 			sourceTree = "<group>";
@@ -136,6 +148,7 @@
 				4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */,
 				4C23B79523D60EC1007CAA55 /* LATouch.swift */,
 				4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */,
+				4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -153,6 +166,8 @@
 			children = (
 				4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */,
 				4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */,
+				4CC0820624649A4800489D12 /* DisplayCalibrationViewController.swift */,
+				4CC0820724649A4800489D12 /* DisplayCalibrationViewController.xib */,
 			);
 			path = "Screen Latency";
 			sourceTree = "<group>";
@@ -221,6 +236,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CC0820924649A4800489D12 /* DisplayCalibrationViewController.xib in Resources */,
+				4CC0820D24649A5700489D12 /* TouchCalibrationViewController.xib in Resources */,
 				4C23B78423D6060D007CAA55 /* LaunchScreen.storyboard in Resources */,
 				4CFB280223D8E3AF00D1EE5A /* TapLatencyViewController.xib in Resources */,
 				4C23B78123D6060D007CAA55 /* Assets.xcassets in Resources */,
@@ -237,11 +254,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */,
+				4C882D6C2465C255007234DA /* LATouchCalibrationData.swift in Sources */,
 				4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */,
 				4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */,
 				4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */,
 				4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */,
 				4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */,
+				4CC0820824649A4800489D12 /* DisplayCalibrationViewController.swift in Sources */,
 				4C23B7A523D61CE6007CAA55 /* SocketEnums.swift in Sources */,
 				4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */,
 				4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */,
@@ -249,6 +268,7 @@
 				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
 				4C1EE6552411687D000EBAC1 /* ClockUpdate.swift in Sources */,
 				4CC0820F24649E1200489D12 /* LatarViewController.swift in Sources */,
+				4CC0820C24649A5700489D12 /* TouchCalibrationViewController.swift in Sources */,
 				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
 				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
 				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,

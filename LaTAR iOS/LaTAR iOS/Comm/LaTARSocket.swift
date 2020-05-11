@@ -260,7 +260,21 @@ class LaTARSocket {
                                                              userInfo: ["command": cmd_byte.TAP_STOP.rawValue ]));
                 return;
             
+            case .CALIBRATION_DISPLAY_START:
+                NotificationCenter.default.post(Notification(name:displayCalibrationStartNotification, object:response));
                 return;
+            case .CALIBRATION_DISPLAY_STOP:
+                NotificationCenter.default.post(Notification(name:teardownNotification, object:response,
+                userInfo: ["command": cmd_byte.CALIBRATION_DISPLAY_STOP.rawValue ]));
+                return;
+            case .CALIBRATION_TOUCH_START:
+                NotificationCenter.default.post(Notification(name:touchCalibrationStartNotification, object:response));
+                return;
+            case .CALIBRATION_TOUCH_STOP:
+                NotificationCenter.default.post(Notification(name:teardownNotification, object:response,
+                                                             userInfo: nil )); //["command": cmd_byte.CALIBRATION_TOUCH_STOP.rawValue ]));
+                return;
+            
             default:
                 return;
             }
@@ -407,6 +421,26 @@ class LaTARSocket {
         catch
         {
             HMLog("Error trying to send LAScreenAction: \(error)");
+        }
+    }
+    
+    func sendTouchCalibration(_ touch:LATouchCalibrationData)
+    {
+        do
+        {
+            let jsonData:Data = try self.encoder.encode(touch);
+            guard let json:String = String(data:jsonData, encoding:.utf8) else {
+                HMLog("Could not convert json data to string");
+                return;
+            }
+            
+            let request = SocketRequest.createRequest(cmd: .CALIBRATION_TOUCH_STOP, ctl: .enq, body: json, comment: nil, response_handler: nil);
+            self.enqueue(request: request);
+            
+        }
+        catch
+        {
+            HMLog("Error trying to send LATouch: \(error)");
         }
     }
     
