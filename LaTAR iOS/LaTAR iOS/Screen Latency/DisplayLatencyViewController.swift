@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DisplayLatencyViewController: UIViewController {
+class DisplayLatencyViewController: LatarViewController {
     
     public var count:Int = 0;       // number of times to change color
     public var interval:Int = 0;    // interval in ms between color changes
@@ -21,21 +21,22 @@ class DisplayLatencyViewController: UIViewController {
         super.viewDidAppear(animated);
         self.view.backgroundColor = UIColor.white;
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleStart(notification:)), name: displayLatenceyStartNotification, object: nil);
-        
         LaTARSocket.shared.acknowledgeCommand(.DISPLAY_START);
     }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated);
-        NotificationCenter.default.removeObserver(self);
-    }
-
-    @objc func handleStart(notification: Notification)
+    
+    @objc override func handleStart(notification: Notification?)
     {
-        // TODO: do we need to do anything when we start?
-        // get count, interval ms from response
+        guard let displayParams:Dictionary<String, Int> = notification?.object as? Dictionary<String, Int>,
+            let count:Int = displayParams["count"],
+            let interval:Int = displayParams["interval"]
+        else
+        {
+            HMLog("Error! Display Latency could not decode count and interval values");
+            return;
+        }
         
+        self.count = count;
+        self.interval = interval;
         self.setupTimer();
         
     }
@@ -50,7 +51,7 @@ class DisplayLatencyViewController: UIViewController {
         timer.schedule(deadline: .now() + intervalSeconds, repeating: intervalSeconds, leeway: .nanoseconds(0))
         timer.setEventHandler {
             self.updateDisplay();
-        
+            
         }
         timer.resume()
     }
@@ -67,8 +68,9 @@ class DisplayLatencyViewController: UIViewController {
         self.testIndex += 1;
         if(self.testIndex >= self.count)
         {
-			NotificationCenter.default.post(Notification(name:displayLatenceyStopNotification, object:nil));
-			self.timer.cancel();
+            NotificationCenter.default.post(Notification(name:teardownNotification, object:nil,
+                                                         userInfo: ["command": cmd_byte.DISPLAY_STOP.rawValue]));
+            self.timer.cancel();
             return;
         }
     }

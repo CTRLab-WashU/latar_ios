@@ -27,6 +27,7 @@
 		4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */; };
 		4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */; };
 		4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637ECF24058F7700C139F9 /* DeviceClock.swift */; };
+		4CC0820F24649E1200489D12 /* LatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0820E24649E1200489D12 /* LatarViewController.swift */; };
 		4CFB280223D8E3AF00D1EE5A /* TapLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */; };
 		4CFB280423D8E3C900D1EE5A /* DisplayLatencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLatencyViewController.swift; sourceTree = "<group>"; };
 		4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAScreenAction.swift; sourceTree = "<group>"; };
 		4C637ECF24058F7700C139F9 /* DeviceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceClock.swift; sourceTree = "<group>"; };
+		4CC0820E24649E1200489D12 /* LatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatarViewController.swift; sourceTree = "<group>"; };
 		4CFB280123D8E3AF00D1EE5A /* TapLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapLatencyViewController.xib; sourceTree = "<group>"; };
 		4CFB280323D8E3C900D1EE5A /* DisplayLatencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayLatencyViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,11 +90,11 @@
 		4C23B77323D6060B007CAA55 /* LaTAR iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C2A6BC023D8B69C00D45466 /* Screen Latency */,
 				4C23B79B23D612B8007CAA55 /* Extensions */,
 				4C23B79423D60EB4007CAA55 /* Data Models */,
 				4C23B79023D60951007CAA55 /* Comm */,
-				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C23B77423D6060B007CAA55 /* AppDelegate.swift */,
 				4C23B77823D6060B007CAA55 /* HomeViewController.swift */,
 				4C23B77A23D6060B007CAA55 /* Main.storyboard */,
@@ -100,6 +102,7 @@
 				4C23B78223D6060D007CAA55 /* LaunchScreen.storyboard */,
 				4C23B78523D6060D007CAA55 /* Info.plist */,
 				4C23B77D23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld */,
+				4CC0820E24649E1200489D12 /* LatarViewController.swift */,
 			);
 			path = "LaTAR iOS";
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				4C23B7A423D61CE6007CAA55 /* SocketResponse.swift in Sources */,
 				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
 				4C1EE6552411687D000EBAC1 /* ClockUpdate.swift in Sources */,
+				4CC0820F24649E1200489D12 /* LatarViewController.swift in Sources */,
 				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
 				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
 				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,
@@ -393,6 +397,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GT94FFC924;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -406,6 +411,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.healthyMedium.LaTAR-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -418,6 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GT94FFC924;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -431,6 +438,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.healthyMedium.LaTAR-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

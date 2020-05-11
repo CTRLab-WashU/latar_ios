@@ -26,13 +26,14 @@ class HomeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(setupTapLatency(notification:)),
                                                name: tapLatenceyStartNotification, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(teardownTapLatency(notification:)),
-                                               name: tapLatenceyStopNotification, object: nil);
-        
         NotificationCenter.default.addObserver(self, selector: #selector(setupDisplayLatency(notification:)),
                                                name: displayLatenceyStartNotification, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(teardownDisplayLatency(notification:)),
-                                               name: displayLatenceyStopNotification, object: nil);
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(teardown(notification:)),
+                                               name: teardownNotification, object: nil);
+        
+        
         
     }
     
@@ -48,7 +49,7 @@ class HomeViewController: UIViewController {
             
             vc.modalPresentationStyle = .fullScreen;
             self.present(vc, animated: true) {
-                
+                vc.handleStart(notification: notification);
             }
         }
     }
@@ -57,39 +58,39 @@ class HomeViewController: UIViewController {
     @objc func setupDisplayLatency(notification:Notification)
     {
         DispatchQueue.main.async {
-            guard let displayParams:Dictionary<String, Int> = notification.object as! Dictionary<String, Int>,
-                let count:Int = displayParams["count"],
-                let interval:Int = displayParams["interval"]
-                else { return; }
-            
+           
             let vc = DisplayLatencyViewController.init(nibName: "DisplayLatencyViewController", bundle: nil);
-            vc.count = count;
-            vc.interval = interval;
             
             vc.modalPresentationStyle = .fullScreen;
             self.present(vc, animated: true) {
-				//The tap test never started because the notification came in before the controller could observe it.
-				vc.setupTimer()
+                vc.handleStart(notification: notification);
             }
         }
     }
     
     
-    @objc func teardownTapLatency(notification:Notification)
+    @objc func setupTouchCalibration(notification:Notification)
     {
         DispatchQueue.main.async {
-            self.dismiss(animated: true) {
-                LaTARSocket.shared.acknowledgeCommand(.TAP_STOP);
+            let vc = TapLatencyViewController.init(nibName: "TapLatencyViewController", bundle: nil);
+            
+            vc.modalPresentationStyle = .fullScreen;
+            self.present(vc, animated: true) {
+                
             }
         }
     }
     
-    
-    @objc func teardownDisplayLatency(notification:Notification)
+    @objc func teardown(notification:Notification)
     {
         DispatchQueue.main.async {
-            self.dismiss(animated: true) {
-                LaTARSocket.shared.acknowledgeCommand(.DISPLAY_STOP);
+            if let vc = self.presentedViewController as? LatarViewController
+            {
+                vc.handleStop(notification: notification);
+            }
+        self.dismiss(animated: true) {
+            guard let cmd:UInt8 = notification.userInfo?["command"] as? UInt8 else { return; }
+            LaTARSocket.shared.acknowledgeCommand(cmd_byte(rawValue: cmd)!);
             }
         }
     }

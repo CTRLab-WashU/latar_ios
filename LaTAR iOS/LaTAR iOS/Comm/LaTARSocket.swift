@@ -246,7 +246,8 @@ class LaTARSocket {
             case .DISPLAY_DATA:
                 return;
             case .DISPLAY_STOP:
-                NotificationCenter.default.post(Notification(name:displayLatenceyStopNotification, object:response));
+                NotificationCenter.default.post(Notification(name:teardownNotification, object:response,
+                                                             userInfo: ["command": cmd_byte.DISPLAY_STOP.rawValue]));
                 return;
         
             case .TAP_START:
@@ -255,7 +256,10 @@ class LaTARSocket {
             case .TAP_DATA:
                 return;
             case .TAP_STOP:
-                NotificationCenter.default.post(Notification(name:tapLatenceyStopNotification, object:response));
+                NotificationCenter.default.post(Notification(name:teardownNotification, object:response,
+                                                             userInfo: ["command": cmd_byte.TAP_STOP.rawValue ]));
+                return;
+            
                 return;
             default:
                 return;

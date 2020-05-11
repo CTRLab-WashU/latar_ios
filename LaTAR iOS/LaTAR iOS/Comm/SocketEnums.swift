@@ -32,8 +32,8 @@ enum cmd_byte: UInt8
     
     case DEVICE_INFO            = 0x24;
     case DEVICE_IDENTIFY        = 0x25;
-    
-    case RESET                  = 0x26;
+    case APP_ERROR              = 0x26;
+    case RESET                  = 0x27;
     
     case DISPLAY_START          = 0x28;
     case DISPLAY_DATA           = 0x29;
@@ -43,6 +43,10 @@ enum cmd_byte: UInt8
     case TAP_DATA               = 0x2C;
     case TAP_STOP               = 0x2D;
 
+    case CALIBRATION_TOUCH_START    = 0x2E;
+    case CALIBRATION_TOUCH_STOP     = 0x2F;
+    case CALIBRATION_DISPLAY_START  = 0x30;
+    case CALIBRATION_DISPLAY_STOP   = 0x31;
     
     static func fromString(_ str:String) -> cmd_byte?
     {
@@ -64,7 +68,12 @@ let tapLatenceyStopNotification:Notification.Name = Notification.Name(rawValue: 
 let displayLatenceyStartNotification:Notification.Name = Notification.Name(rawValue: "displayLatencyStart");
 let displayLatenceyStopNotification:Notification.Name = Notification.Name(rawValue: "displayLatencyStop");
 
+let displayCalibrationStartNotification:Notification.Name = Notification.Name(rawValue: "displayCalibrationStart");
+let displayCalibrationStopNotification:Notification.Name = Notification.Name(rawValue: "displayCalibrationStop");
 
+let touchCalibrationStartNotification:Notification.Name = Notification.Name(rawValue: "touchCalibrationStart");
+let touchCalibrationStopNotification:Notification.Name = Notification.Name(rawValue: "touchCalibrationStop");
 
+let teardownNotification:Notification.Name = Notification.Name(rawValue: "teardownNotification");
 
 
