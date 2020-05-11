@@ -17,19 +17,28 @@ class DisplayCalibrationViewController: LatarViewController {
     public var color:Int = 1;       // current color (1 = white, 0 = black)
     
     public var timer: DispatchSourceTimer!
+    private var previousBrightness:CGFloat = 0;
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         self.view.backgroundColor = UIColor.white;
-                
+        
+        self.previousBrightness = UIScreen.main.brightness;
+        UIScreen.main.brightness = CGFloat(1.0);
         LaTARSocket.shared.acknowledgeCommand(.CALIBRATION_DISPLAY_START);
     }
     
     @objc override func handleStart(notification: Notification?)
     {
+        HMLog("starting calibration");
         self.count = 3;
         self.interval = 500;
         self.setupTimer();
+    }
+    
+    @objc override func handleStop(notification: Notification?) {
+        UIScreen.main.brightness = self.previousBrightness;
+        HMLog("ending calibration");
     }
     
     func setupTimer()
@@ -42,22 +51,20 @@ class DisplayCalibrationViewController: LatarViewController {
         timer.schedule(deadline: .now() + intervalSeconds, repeating: intervalSeconds, leeway: .nanoseconds(0))
         timer.setEventHandler {
             self.updateDisplay();
-            
+            HMLog("updating Display");
         }
         timer.resume()
     }
     
     @objc func updateDisplay()
     {
-        let callbackTime = DeviceClock.getCurrentTime();
-        let currentColor = self.color;
+        
+        HMLog("color: \(self.color)");
         self.performSelector(onMainThread: #selector(toggleScreenColor), with: nil, waitUntilDone: true);
-        let displayTime = DeviceClock.getCurrentTime();
-        let screenAction:LAScreenAction = LAScreenAction(index: self.testIndex, color: currentColor, callbackTime: callbackTime,displayTime: displayTime);
-        LaTARSocket.shared.sendScreenAction(screenAction);
+        
         
         self.testIndex += 1;
-        if(self.testIndex >= self.count)
+        if(self.testIndex > self.count)
         {
             NotificationCenter.default.post(Notification(name:teardownNotification, object:nil,
                                                          userInfo: ["command": cmd_byte.CALIBRATION_DISPLAY_STOP.rawValue]));

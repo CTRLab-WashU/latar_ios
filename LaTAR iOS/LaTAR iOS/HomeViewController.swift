@@ -28,7 +28,10 @@ class HomeViewController: UIViewController {
                                                name: tapLatenceyStartNotification, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(setupDisplayLatency(notification:)),
                                                name: displayLatenceyStartNotification, object: nil);
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupDisplayCalibration(notification:)),
+                                               name: displayCalibrationStartNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(setupTouchCalibration),
+                                               name: touchCalibrationStartNotification, object: nil);
         
         NotificationCenter.default.addObserver(self, selector: #selector(teardown(notification:)),
                                                name: teardownNotification, object: nil);
@@ -72,11 +75,23 @@ class HomeViewController: UIViewController {
     @objc func setupTouchCalibration(notification:Notification)
     {
         DispatchQueue.main.async {
-            let vc = TapLatencyViewController.init(nibName: "TapLatencyViewController", bundle: nil);
+            let vc = TouchCalibrationViewController.init(nibName: "TouchCalibrationViewController", bundle: nil);
             
             vc.modalPresentationStyle = .fullScreen;
             self.present(vc, animated: true) {
-                
+                vc.handleStart(notification: notification);
+            }
+        }
+    }
+    
+    @objc func setupDisplayCalibration(notification:Notification)
+    {
+        DispatchQueue.main.async {
+            let vc = DisplayCalibrationViewController.init(nibName: "DisplayCalibrationViewController", bundle: nil);
+            
+            vc.modalPresentationStyle = .fullScreen;
+            self.present(vc, animated: true) {
+                vc.handleStart(notification: notification);
             }
         }
     }

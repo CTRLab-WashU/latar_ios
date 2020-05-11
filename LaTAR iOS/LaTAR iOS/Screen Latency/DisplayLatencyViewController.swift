@@ -16,11 +16,13 @@ class DisplayLatencyViewController: LatarViewController {
     public var color:Int = 1;       // current color (1 = white, 0 = black)
     
     public var timer: DispatchSourceTimer!
-    
+    private var previousBrightness:CGFloat = 0;
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         self.view.backgroundColor = UIColor.white;
         
+        self.previousBrightness = UIScreen.main.brightness;
+        UIScreen.main.brightness = CGFloat(1.0);
         LaTARSocket.shared.acknowledgeCommand(.DISPLAY_START);
     }
     
@@ -39,6 +41,10 @@ class DisplayLatencyViewController: LatarViewController {
         self.interval = interval;
         self.setupTimer();
         
+    }
+    
+    @objc override func handleStop(notification: Notification?) {
+        UIScreen.main.brightness = self.previousBrightness;
     }
     
     func setupTimer()
@@ -66,7 +72,7 @@ class DisplayLatencyViewController: LatarViewController {
         LaTARSocket.shared.sendScreenAction(screenAction);
         
         self.testIndex += 1;
-        if(self.testIndex >= self.count)
+        if(self.testIndex > self.count)
         {
             NotificationCenter.default.post(Notification(name:teardownNotification, object:nil,
                                                          userInfo: ["command": cmd_byte.DISPLAY_STOP.rawValue]));
