@@ -26,8 +26,16 @@
 		4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */; };
 		4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */; };
 		4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */; };
+		4C52381F246D87FD009F142D /* WorkerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C52381E246D87FD009F142D /* WorkerResult.swift */; };
+		4C523821246D8846009F142D /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C523820246D8846009F142D /* Worker.swift */; };
+		4C523823246DD00F009F142D /* LoadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C523822246DD00F009F142D /* LoadResult.swift */; };
+		4C523825246DD72F009F142D /* SyntheticLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C523824246DD72F009F142D /* SyntheticLoad.swift */; };
 		4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637ECF24058F7700C139F9 /* DeviceClock.swift */; };
 		4C882D6C2465C255007234DA /* LATouchCalibrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */; };
+		4CB67265246C86B500BD8175 /* LoadParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB67264246C86B500BD8175 /* LoadParameters.swift */; };
+		4CB67267246C885C00BD8175 /* Workload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB67266246C885C00BD8175 /* Workload.swift */; };
+		4CB6726A246C88A800BD8175 /* MatrixWorkload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB67269246C88A800BD8175 /* MatrixWorkload.swift */; };
+		4CB6726C246C8BB500BD8175 /* RegexWorkload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6726B246C8BB500BD8175 /* RegexWorkload.swift */; };
 		4CC0820824649A4800489D12 /* DisplayCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0820624649A4800489D12 /* DisplayCalibrationViewController.swift */; };
 		4CC0820924649A4800489D12 /* DisplayCalibrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0820724649A4800489D12 /* DisplayCalibrationViewController.xib */; };
 		4CC0820C24649A5700489D12 /* TouchCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0820A24649A5700489D12 /* TouchCalibrationViewController.swift */; };
@@ -58,8 +66,17 @@
 		4C23B7B623D646FC007CAA55 /* LADeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LADeviceInfo.swift; sourceTree = "<group>"; };
 		4C2A6BC123D8B6AC00D45466 /* DisplayLatencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLatencyViewController.swift; sourceTree = "<group>"; };
 		4C3D3F7B23FE116C00B0BDB6 /* LAScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAScreenAction.swift; sourceTree = "<group>"; };
+		4C52381E246D87FD009F142D /* WorkerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerResult.swift; sourceTree = "<group>"; };
+		4C523820246D8846009F142D /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		4C523822246DD00F009F142D /* LoadResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResult.swift; sourceTree = "<group>"; };
+		4C523824246DD72F009F142D /* SyntheticLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticLoad.swift; sourceTree = "<group>"; };
 		4C637ECF24058F7700C139F9 /* DeviceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceClock.swift; sourceTree = "<group>"; };
 		4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LATouchCalibrationData.swift; sourceTree = "<group>"; };
+		4CA327A22469D0EB00C2C431 /* hMCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hMCrashReporter.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/hMCrashReporter-blnerfndtgpikpexafimdrawfncd/Build/Products/Debug-iphoneos/hMCrashReporter.framework"; sourceTree = "<group>"; };
+		4CB67264246C86B500BD8175 /* LoadParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadParameters.swift; sourceTree = "<group>"; };
+		4CB67266246C885C00BD8175 /* Workload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workload.swift; sourceTree = "<group>"; };
+		4CB67269246C88A800BD8175 /* MatrixWorkload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixWorkload.swift; sourceTree = "<group>"; };
+		4CB6726B246C8BB500BD8175 /* RegexWorkload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexWorkload.swift; sourceTree = "<group>"; };
 		4CC0820624649A4800489D12 /* DisplayCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCalibrationViewController.swift; sourceTree = "<group>"; };
 		4CC0820724649A4800489D12 /* DisplayCalibrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayCalibrationViewController.xib; sourceTree = "<group>"; };
 		4CC0820A24649A5700489D12 /* TouchCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchCalibrationViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +103,7 @@
 			children = (
 				4C23B77323D6060B007CAA55 /* LaTAR iOS */,
 				4C23B77223D6060B007CAA55 /* Products */,
+				4CA327A12469D0EB00C2C431 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +118,7 @@
 		4C23B77323D6060B007CAA55 /* LaTAR iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4C895884246B41C5002856E5 /* Load */,
 				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C2A6BC023D8B69C00D45466 /* Screen Latency */,
 				4C23B79B23D612B8007CAA55 /* Extensions */,
@@ -170,6 +189,37 @@
 				4CC0820724649A4800489D12 /* DisplayCalibrationViewController.xib */,
 			);
 			path = "Screen Latency";
+			sourceTree = "<group>";
+		};
+		4C895884246B41C5002856E5 /* Load */ = {
+			isa = PBXGroup;
+			children = (
+				4CB67268246C889900BD8175 /* Workloads */,
+				4CB67264246C86B500BD8175 /* LoadParameters.swift */,
+				4C523822246DD00F009F142D /* LoadResult.swift */,
+				4C52381E246D87FD009F142D /* WorkerResult.swift */,
+				4C523820246D8846009F142D /* Worker.swift */,
+				4C523824246DD72F009F142D /* SyntheticLoad.swift */,
+			);
+			path = Load;
+			sourceTree = "<group>";
+		};
+		4CA327A12469D0EB00C2C431 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4CA327A22469D0EB00C2C431 /* hMCrashReporter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4CB67268246C889900BD8175 /* Workloads */ = {
+			isa = PBXGroup;
+			children = (
+				4CB67266246C885C00BD8175 /* Workload.swift */,
+				4CB67269246C88A800BD8175 /* MatrixWorkload.swift */,
+				4CB6726B246C8BB500BD8175 /* RegexWorkload.swift */,
+			);
+			path = Workloads;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,18 +303,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C52381F246D87FD009F142D /* WorkerResult.swift in Sources */,
 				4C23B77F23D6060B007CAA55 /* LaTAR_iOS.xcdatamodeld in Sources */,
+				4C523823246DD00F009F142D /* LoadResult.swift in Sources */,
 				4C882D6C2465C255007234DA /* LATouchCalibrationData.swift in Sources */,
 				4C23B79623D60EC1007CAA55 /* LATouch.swift in Sources */,
 				4C23B77923D6060B007CAA55 /* HomeViewController.swift in Sources */,
+				4CB67267246C885C00BD8175 /* Workload.swift in Sources */,
+				4CB6726C246C8BB500BD8175 /* RegexWorkload.swift in Sources */,
 				4C2A6BC223D8B6AC00D45466 /* DisplayLatencyViewController.swift in Sources */,
 				4C3D3F7C23FE116C00B0BDB6 /* LAScreenAction.swift in Sources */,
 				4C23B79323D6097E007CAA55 /* LALogging.swift in Sources */,
+				4C523821246D8846009F142D /* Worker.swift in Sources */,
 				4CC0820824649A4800489D12 /* DisplayCalibrationViewController.swift in Sources */,
 				4C23B7A523D61CE6007CAA55 /* SocketEnums.swift in Sources */,
 				4C23B7B523D63078007CAA55 /* Data+Hex.swift in Sources */,
 				4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */,
 				4C23B7A423D61CE6007CAA55 /* SocketResponse.swift in Sources */,
+				4C523825246DD72F009F142D /* SyntheticLoad.swift in Sources */,
 				4C23B78E23D608D6007CAA55 /* TapLatencyViewController.swift in Sources */,
 				4C1EE6552411687D000EBAC1 /* ClockUpdate.swift in Sources */,
 				4CC0820F24649E1200489D12 /* LatarViewController.swift in Sources */,
@@ -272,7 +328,9 @@
 				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
 				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
 				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,
+				4CB67265246C86B500BD8175 /* LoadParameters.swift in Sources */,
 				4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */,
+				4CB6726A246C88A800BD8175 /* MatrixWorkload.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
