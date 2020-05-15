@@ -75,6 +75,7 @@ public class Worker:NSObject
         }
         
         self.stop = Date().timeIntervalSince1970;
+        self.workload.teardown();
         self.group?.leave();
     }
     

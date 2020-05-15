@@ -54,7 +54,7 @@ class SocketResponse: CustomStringConvertible
         response.ctl = ctl;
         
         // Does it have a comment section?
-        if let comment_start = data.index(of: frame_byte.stx.rawValue), let comment_end = data.index(of: frame_byte.etx.rawValue)
+        if let comment_start = data.firstIndex(of: frame_byte.stx.rawValue), let comment_end = data.firstIndex(of: frame_byte.etx.rawValue)
         {
             let comment_data = data.subdata(in: (comment_start + 1)..<comment_end);
             response.comment = String(data:comment_data, encoding:.utf8);
