@@ -28,18 +28,27 @@ class DisplayLatencyViewController: LatarViewController {
     
     @objc override func handleStart(notification: Notification?)
     {
-        guard let displayParams:Dictionary<String, Int> = notification?.object as? Dictionary<String, Int>,
-            let count:Int = displayParams["count"],
-            let interval:Int = displayParams["interval"]
+        guard let response = notification?.object as? SocketResponse,
+            let response_data:Data = response.body?.data(using: .utf8)
         else
         {
             HMLog("Error! Display Latency could not decode count and interval values");
             return;
         }
-        
-        self.count = count;
-        self.interval = interval;
-        self.setupTimer();
+        do
+        {
+            let displayParams:Dictionary<String, Int> = try LaTARSocket.shared.decoder.decode(Dictionary<String, Int>.self, from: response_data);
+            let count:Int = displayParams["count"]!;
+            let interval:Int = displayParams["interval"]!;
+            
+            self.count = count;
+            self.interval = interval;
+            self.setupTimer();
+        }
+        catch
+        {
+            HMLog("Error trying to decode response data: \(error) \(response)");
+        }
         
     }
     

@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class LoadParameters
+public struct LoadParameters:Codable
 {
 
     

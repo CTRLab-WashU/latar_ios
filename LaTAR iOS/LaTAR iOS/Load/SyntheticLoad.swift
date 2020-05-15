@@ -14,8 +14,10 @@ public class SyntheticLoad:NSObject
     private var params:LoadParameters!;
     private var group:DispatchGroup!;
     
-    public func start(params:LoadParameters)
+    
+    init (params:LoadParameters)
     {
+        super.init();
         self.params = params;
         self.group = DispatchGroup();
         
@@ -24,7 +26,10 @@ public class SyntheticLoad:NSObject
             let worker:Worker = Worker(workload: params.workload, interval: UInt64(params.interval), group:self.group);
             self.workers.append(worker);
         }
-        
+    }
+    
+    public func start()
+    {
         for worker in workers
         {
             worker.startThread();

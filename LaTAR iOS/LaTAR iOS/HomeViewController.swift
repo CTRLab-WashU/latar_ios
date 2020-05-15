@@ -14,6 +14,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var textLog: UITextView!
     
     public var logText:String = "";
+    private var load:SyntheticLoad?;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,11 +51,7 @@ class HomeViewController: UIViewController {
     {
         DispatchQueue.main.async {
             let vc = TapLatencyViewController.init(nibName: "TapLatencyViewController", bundle: nil);
-            
-            vc.modalPresentationStyle = .fullScreen;
-            self.present(vc, animated: true) {
-                vc.handleStart(notification: notification);
-            }
+            self.setup(notification: notification, vc: vc);
         }
     }
     
@@ -61,13 +59,8 @@ class HomeViewController: UIViewController {
     @objc func setupDisplayLatency(notification:Notification)
     {
         DispatchQueue.main.async {
-           
             let vc = DisplayLatencyViewController.init(nibName: "DisplayLatencyViewController", bundle: nil);
-            
-            vc.modalPresentationStyle = .fullScreen;
-            self.present(vc, animated: true) {
-                vc.handleStart(notification: notification);
-            }
+            self.setup(notification: notification, vc: vc);
         }
     }
     
@@ -76,11 +69,7 @@ class HomeViewController: UIViewController {
     {
         DispatchQueue.main.async {
             let vc = TouchCalibrationViewController.init(nibName: "TouchCalibrationViewController", bundle: nil);
-            
-            vc.modalPresentationStyle = .fullScreen;
-            self.present(vc, animated: true) {
-                vc.handleStart(notification: notification);
-            }
+            self.setup(notification: notification, vc: vc);
         }
     }
     
@@ -88,11 +77,16 @@ class HomeViewController: UIViewController {
     {
         DispatchQueue.main.async {
             let vc = DisplayCalibrationViewController.init(nibName: "DisplayCalibrationViewController", bundle: nil);
-            
-            vc.modalPresentationStyle = .fullScreen;
-            self.present(vc, animated: true) {
-                vc.handleStart(notification: notification);
-            }
+            self.setup(notification: notification, vc: vc);
+        }
+    }
+    
+    @objc func setup(notification:Notification, vc:LatarViewController)
+    {
+        self.setupLoad(notification:notification);
+        vc.modalPresentationStyle = .fullScreen;
+        self.present(vc, animated: true) {
+            vc.handleStart(notification: notification);
         }
     }
     
@@ -103,9 +97,12 @@ class HomeViewController: UIViewController {
             {
                 vc.handleStop(notification: notification);
             }
+            let loadResult:String? = self.stopLoad();
+            
         self.dismiss(animated: true) {
             guard let cmd:UInt8 = notification.userInfo?["command"] as? UInt8 else { return; }
-            LaTARSocket.shared.acknowledgeCommand(cmd_byte(rawValue: cmd)!);
+            let cmdByte = cmd_byte(rawValue: cmd)!;
+            LaTARSocket.shared.acknowledgeCommand(cmdByte, body: nil, comment: loadResult);
             }
         }
     }
@@ -142,6 +139,47 @@ class HomeViewController: UIViewController {
             sender.setTitle("Disconnect", for: .normal);
         }
     
+    }
+    
+    func setupLoad(notification:Notification)
+    {
+        guard let response = notification.object as? SocketResponse,
+        let commentData = response.comment?.data(using: .utf8)
+        else { return; }
+        
+        do
+        {
+            let params:LoadParameters = try LaTARSocket.shared.decoder.decode(LoadParameters.self, from: commentData)
+            self.load = SyntheticLoad(params: params);
+        }
+        catch
+        {
+            return;
+        }
+    }
+    
+    func startLoad()
+    {
+        self.load?.start();
+    }
+    
+    func stopLoad() -> String?
+    {
+        guard let load = self.load else { return nil; }
+        
+        do
+        {
+            let result = load.stop();
+            let resultData = try LaTARSocket.shared.encoder.encode(result)
+            let resultStr = String(data: resultData, encoding: .utf8);
+            self.load = nil;
+            return resultStr;
+        }
+        catch
+        {
+            HMLog("Error encoding load results \(error)");
+            return nil;
+        }
     }
 }
 

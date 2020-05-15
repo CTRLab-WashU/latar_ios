@@ -229,19 +229,7 @@ class LaTARSocket {
                 
          
             case .DISPLAY_START:
-                
-				guard let response_data:Data = response.body?.data(using: .utf8) else { return; }
-                
-                do{
-                    let displayParams:Dictionary<String, Int> = try self.decoder.decode(Dictionary<String, Int>.self, from: response_data)
-					
-                    NotificationCenter.default.post(Notification(name:displayLatenceyStartNotification, object:displayParams));
-                }
-                catch
-                {
-					HMLog("Error trying to decode response data: \(error) \(response)");
-                }
-                
+                NotificationCenter.default.post(Notification(name:displayLatenceyStartNotification, object:response));
                 return;
             case .DISPLAY_DATA:
                 return;
@@ -378,9 +366,15 @@ class LaTARSocket {
     //MARK: Sending Data
     
     
-    func acknowledgeCommand(_ cmd:cmd_byte)
+    func acknowledgeCommand(_ cmd:cmd_byte, body:String? = nil, comment:String? = nil)
     {
-        let request = SocketRequest.createRequest(cmd: cmd, ctl: .ack, body: nil, comment: nil, response_handler: nil);
+        let request = SocketRequest.createRequest(cmd: cmd, ctl: .ack, body: body, comment: comment, response_handler: nil);
+        self.enqueue(request: request);
+    }
+    
+    func sendRequestCommand(_ cmd:cmd_byte, body:String? = nil, comment:String? = nil)
+    {
+        let request = SocketRequest.createRequest(cmd: cmd, ctl: .enq, body: body, comment: comment, response_handler: nil);
         self.enqueue(request: request);
     }
     
@@ -394,9 +388,7 @@ class LaTARSocket {
                 return;
             }
             
-            let request = SocketRequest.createRequest(cmd: .TAP_DATA, ctl: .enq, body: json, comment: nil, response_handler: nil);
-            self.enqueue(request: request);
-            
+            self.sendRequestCommand(.TAP_DATA, body: json, comment: nil);
         }
         catch
         {
@@ -414,9 +406,7 @@ class LaTARSocket {
                 return;
             }
             
-            let request = SocketRequest.createRequest(cmd: .DISPLAY_DATA, ctl: .enq, body: json, comment: nil, response_handler: nil);
-            self.enqueue(request: request);
-            
+            self.sendRequestCommand(.DISPLAY_DATA, body: json, comment: nil);
         }
         catch
         {
@@ -433,10 +423,7 @@ class LaTARSocket {
                 HMLog("Could not convert json data to string");
                 return;
             }
-            
-            let request = SocketRequest.createRequest(cmd: .CALIBRATION_TOUCH_STOP, ctl: .enq, body: json, comment: nil, response_handler: nil);
-            self.enqueue(request: request);
-            
+            self.sendRequestCommand(.CALIBRATION_TOUCH_STOP, body: json, comment: nil);
         }
         catch
         {
