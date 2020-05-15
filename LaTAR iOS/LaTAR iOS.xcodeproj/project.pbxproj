@@ -30,6 +30,7 @@
 		4C523821246D8846009F142D /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C523820246D8846009F142D /* Worker.swift */; };
 		4C523823246DD00F009F142D /* LoadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C523822246DD00F009F142D /* LoadResult.swift */; };
 		4C523825246DD72F009F142D /* SyntheticLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C523824246DD72F009F142D /* SyntheticLoad.swift */; };
+		4C52382A246DE426009F142D /* matrix_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C523829246DE426009F142D /* matrix_math.c */; };
 		4C637ED024058F7700C139F9 /* DeviceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637ECF24058F7700C139F9 /* DeviceClock.swift */; };
 		4C882D6C2465C255007234DA /* LATouchCalibrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */; };
 		4CB67265246C86B500BD8175 /* LoadParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB67264246C86B500BD8175 /* LoadParameters.swift */; };
@@ -70,6 +71,9 @@
 		4C523820246D8846009F142D /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		4C523822246DD00F009F142D /* LoadResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResult.swift; sourceTree = "<group>"; };
 		4C523824246DD72F009F142D /* SyntheticLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticLoad.swift; sourceTree = "<group>"; };
+		4C523827246DE426009F142D /* LaTAR iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LaTAR iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		4C523828246DE426009F142D /* matrix_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = matrix_math.h; sourceTree = "<group>"; };
+		4C523829246DE426009F142D /* matrix_math.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = matrix_math.c; sourceTree = "<group>"; };
 		4C637ECF24058F7700C139F9 /* DeviceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceClock.swift; sourceTree = "<group>"; };
 		4C882D6B2465C255007234DA /* LATouchCalibrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LATouchCalibrationData.swift; sourceTree = "<group>"; };
 		4CA327A22469D0EB00C2C431 /* hMCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hMCrashReporter.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/hMCrashReporter-blnerfndtgpikpexafimdrawfncd/Build/Products/Debug-iphoneos/hMCrashReporter.framework"; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 		4C23B77323D6060B007CAA55 /* LaTAR iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4C523826246DE412009F142D /* matrix_math */,
 				4C895884246B41C5002856E5 /* Load */,
 				4C23B78B23D608B0007CAA55 /* Tap Latency */,
 				4C2A6BC023D8B69C00D45466 /* Screen Latency */,
@@ -191,6 +196,16 @@
 			path = "Screen Latency";
 			sourceTree = "<group>";
 		};
+		4C523826246DE412009F142D /* matrix_math */ = {
+			isa = PBXGroup;
+			children = (
+				4C523828246DE426009F142D /* matrix_math.h */,
+				4C523829246DE426009F142D /* matrix_math.c */,
+				4C523827246DE426009F142D /* LaTAR iOS-Bridging-Header.h */,
+			);
+			path = matrix_math;
+			sourceTree = "<group>";
+		};
 		4C895884246B41C5002856E5 /* Load */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +272,7 @@
 				TargetAttributes = {
 					4C23B77023D6060B007CAA55 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -328,6 +344,7 @@
 				4C23B7A223D61CE6007CAA55 /* SocketRequest.swift in Sources */,
 				4C23B7A323D61CE6007CAA55 /* LaTARSocket.swift in Sources */,
 				4C23B7B723D646FC007CAA55 /* LADeviceInfo.swift in Sources */,
+				4C52382A246DE426009F142D /* matrix_math.c in Sources */,
 				4CB67265246C86B500BD8175 /* LoadParameters.swift in Sources */,
 				4C23B77523D6060B007CAA55 /* AppDelegate.swift in Sources */,
 				4CB6726A246C88A800BD8175 /* MatrixWorkload.swift in Sources */,
@@ -474,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GT94FFC924;
@@ -492,6 +510,8 @@
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.healthyMedium.LaTAR-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LaTAR iOS/matrix_math/LaTAR iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -501,6 +521,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GT94FFC924;
@@ -519,6 +540,7 @@
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.healthyMedium.LaTAR-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LaTAR iOS/matrix_math/LaTAR iOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

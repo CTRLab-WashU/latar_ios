@@ -18,5 +18,10 @@ public class Workload
     {
         
     }
+    
+    func teardown()
+    {
+        
+    }
 }
 
