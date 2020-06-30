@@ -62,11 +62,11 @@ class LaTARSocket {
     {
         self.isConnected = false;
         self.tcpSocket?.close();
-        HMLog("Disconnected socket.");
+        HMLog("Disconnected socket.", logLevel: . Notification);
     }
     
     func setupTcp() {
-        HMLog("Connecting");
+        HMLog("Connecting", logLevel: .Notification);
         if self.dontActuallyDoStuff
         {
             return;
@@ -79,7 +79,7 @@ class LaTARSocket {
             try self.tcpSocket?.setBlocking(mode: false)
         }
         catch {
-            HMLog("Error creating socket: \(error)")
+            HMLog("Error creating socket: \(error)", logLevel: .Error)
             return
         }
         
@@ -103,10 +103,10 @@ class LaTARSocket {
             try self.udpSocket?.listen(on: Int(self.udpPort));
         }
         catch {
-            HMLog("Error creating socket: \(error)")
+            HMLog("Error creating socket: \(error)", logLevel: .Error)
             return
         }
-        HMLog("Waiting to receive broadcast...");
+        HMLog("Waiting to receive broadcast...", logLevel: .Notification);
         DispatchQueue.global(qos: .default).async {
             while(self.listenForUdp){
                 self.handleUdp();
@@ -136,7 +136,7 @@ class LaTARSocket {
             }
         }
         catch {
-            HMLog("Error writing event to socket: \(error)")
+            HMLog("Error writing event to socket: \(error)", logLevel: .Error)
             return 0;
         }
         
@@ -150,7 +150,7 @@ class LaTARSocket {
         
         if self.send(event: data) > 0
         {
-//            HMLog("Sent request: \(request)");
+            HMLog("Sent request: \(request)", logLevel: .Verbose);
             sendQueue.removeFirst();
             if request.response_handler != nil
             {
@@ -178,7 +178,7 @@ class LaTARSocket {
             //print("Received data...")
         }
         catch {
-            HMLog("Error reading data from socket: \(error)")
+            HMLog("Error reading data from socket: \(error)", logLevel: .Error)
             return
         }
         
@@ -199,12 +199,13 @@ class LaTARSocket {
     
     func handleResponse(data: Data) {
         guard let response = SocketResponse.createResponse(from: data) else { return; }
-//        HMLog("Received response: \(response)");
+        HMLog("Received response: \(response)", logLevel: .Verbose);
         
         // Let's see if there are any requests awaiting this response.
         if let index = self.awaitingResponse.firstIndex(where: { (request) -> Bool in return request.cmd == response.cmd; })
         {
             let request = self.awaitingResponse[index];
+            HMLog("Handling request \(request)", logLevel: .Verbose)
             request.response_handler?(response);
             self.awaitingResponse.remove(at: index);
         }
@@ -277,12 +278,12 @@ class LaTARSocket {
     
     func handleClockUpdate(_ response:SocketResponse)
     {
-        HMLog("Sending Clock Update info");
+        HMLog("Sending Clock Update info", logLevel: .Notification);
         do
         {
             let jsonData:Data = try self.encoder.encode(self.clockUpdates);
             guard let json:String = String(data:jsonData, encoding:.utf8) else {
-                HMLog("Could not convert json data to string");
+                HMLog("Could not convert json data to string", logLevel: .Error);
                 return;
             }
             
@@ -292,7 +293,7 @@ class LaTARSocket {
         }
         catch
         {
-            HMLog("Error trying to send LATouch: \(error)");
+            HMLog("Error trying to send LATouch: \(error)", logLevel: .Error);
         }
         
         
@@ -339,14 +340,14 @@ class LaTARSocket {
                 if self.udpAddress == nil
                 {
                     self.udpAddress = address;
-                    HMLog("Received broadcast, ready to connect.");
+                    HMLog("Received broadcast, ready to connect.", logLevel: .Notification);
                 }
                 break;
             case cmd_byte.CLOCK_SYNC.rawValue:
                 DeviceClock.zero();
                 self.clockUpdates = Array();
                 try socket.write(from: received, to: address)
-                HMLog("Received clock sync");
+                HMLog("Received clock sync", logLevel: .Notification);
                 break;
             default:
                 let timestamp = DeviceClock.getCurrentTime();
@@ -358,7 +359,7 @@ class LaTARSocket {
             }
         }
         catch {
-          HMLog("Error reading data from socket: \(error)")
+            HMLog("Error reading data from socket: \(error)", logLevel: .Error)
           return
         }
     }
@@ -384,7 +385,7 @@ class LaTARSocket {
         {
             let jsonData:Data = try self.encoder.encode(touch);
             guard let json:String = String(data:jsonData, encoding:.utf8) else {
-                HMLog("Could not convert json data to string");
+                HMLog("Could not convert json data to string", logLevel: .Error );
                 return;
             }
             
@@ -392,7 +393,7 @@ class LaTARSocket {
         }
         catch
         {
-            HMLog("Error trying to send LATouch: \(error)");
+            HMLog("Error trying to send LATouch: \(error)", logLevel: .Error    );
         }
     }
     
@@ -402,7 +403,7 @@ class LaTARSocket {
         {
             let jsonData:Data = try self.encoder.encode(screenAction);
             guard let json:String = String(data:jsonData, encoding:.utf8) else {
-                HMLog("Could not convert json data to string");
+                HMLog("Could not convert json data to string", logLevel: .Error );
                 return;
             }
             
@@ -410,7 +411,7 @@ class LaTARSocket {
         }
         catch
         {
-            HMLog("Error trying to send LAScreenAction: \(error)");
+            HMLog("Error trying to send LAScreenAction: \(error)", logLevel: .Error );
         }
     }
     
@@ -420,14 +421,14 @@ class LaTARSocket {
         {
             let jsonData:Data = try self.encoder.encode(touch);
             guard let json:String = String(data:jsonData, encoding:.utf8) else {
-                HMLog("Could not convert json data to string");
+                HMLog("Could not convert json data to string", logLevel: .Error );
                 return;
             }
             self.sendRequestCommand(.CALIBRATION_TOUCH_STOP, body: json, comment: nil);
         }
         catch
         {
-            HMLog("Error trying to send LATouch: \(error)");
+            HMLog("Error trying to send LATouch: \(error)", logLevel: .Error);
         }
     }
     

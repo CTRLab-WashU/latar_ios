@@ -8,6 +8,15 @@
 
 import Foundation
 
+public enum LogLevel: Int
+{
+    case Error = 10
+    case Warning = 5
+    case Notification = 3
+    case Info = 2
+    case Verbose = 1
+}
+
 class LALogging: NSObject
 {
     static public let loggedNotification = Notification.Name("loggedNotification");
@@ -19,7 +28,8 @@ class LALogging: NSObject
     public var fh: FileHandle?;
     public var fm = FileManager.default;
     public var logName:String;
-    
+    public var logLevel:LogLevel = .Info
+    public var fileLogLevel:LogLevel = .Info
     public override init()
     {
         let df = DateFormatter();
@@ -35,13 +45,19 @@ class LALogging: NSObject
         super.init();
     }
     
-    public func setLogToFile(log: Bool)
+    public func setLogToFile(log: Bool, fileLogLevel:LogLevel = .Info)
     {
         self.logToFile = log;
+        self.fileLogLevel = fileLogLevel;
     }
     
+    public func setLogLevel(_ ll:LogLevel)
+    {
+        self.logLevel = ll;
+    }
 
-    public func logString(_ s:String)
+
+    public func logToFile(_ s:String, logLevel:LogLevel = .Info)
     {
         if logToFile == false
         {
@@ -52,7 +68,7 @@ class LALogging: NSObject
         let filepath = documentsDirecotry.appendingPathComponent(logName);
         
         let logDate = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short);
-        let line = "\(logDate): \(s)\n";
+        let line = "\(logDate) [\(logLevel)]: \(s)\n";
 
         do
         {
@@ -84,15 +100,19 @@ class LALogging: NSObject
     
 }
 
-public func HMLog(_ s: String, quiet:Bool = false)
+public func HMLog(_ s: String, logLevel:LogLevel = .Info)
 {
 
-    if !quiet
+    if logLevel.rawValue >= LALogging.sharedInstance.fileLogLevel.rawValue
     {
-        print(s);
+        LALogging.sharedInstance.logToFile(s, logLevel: logLevel);
+    }
+
+    if logLevel.rawValue >= LALogging.sharedInstance.logLevel.rawValue
+    {
+        print("[\(logLevel)]: \(s)")
+        NotificationCenter.default.post(name: LALogging.loggedNotification, object: nil, userInfo: ["log": s, "logLevel": logLevel]);
     }
     
-    LALogging.sharedInstance.logString(s);
-    NotificationCenter.default.post(name: LALogging.loggedNotification, object: nil, userInfo: ["log": s]);
 }
 

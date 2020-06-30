@@ -23,6 +23,8 @@ class HomeViewController: UIViewController {
         
         self.versionLabel.text = "Ver \(version)";
         
+        LALogging.sharedInstance.setLogLevel(.Info);
+        
         NotificationCenter.default.addObserver(self, selector: #selector(displayLog(notification:)),
                                                name: LALogging.loggedNotification, object: nil);
         
@@ -146,27 +148,30 @@ class HomeViewController: UIViewController {
         guard let response = notification.object as? SocketResponse,
         let commentData = response.comment?.data(using: .utf8)
         else { return; }
-        
+        HMLog("Loading SyntheticLoad parameters", logLevel: .Verbose)
         do
         {
             let params:LoadParameters = try LaTARSocket.shared.decoder.decode(LoadParameters.self, from: commentData)
+            HMLog("Loading SyntheticLoad with params \(params)", logLevel: .Verbose)
             self.load = SyntheticLoad(params: params);
         }
         catch
         {
+            HMLog("Error loading LoadParameters \(error)", logLevel: .Error)
             return;
         }
     }
     
     func startLoad()
     {
+        HMLog("Starting SyntheticLoad", logLevel: .Verbose)
         self.load?.start();
     }
     
     func stopLoad() -> String?
     {
         guard let load = self.load else { return nil; }
-        
+        HMLog("Stopping SyntheticLoad", logLevel: .Verbose)
         do
         {
             let result = load.stop();
@@ -177,7 +182,7 @@ class HomeViewController: UIViewController {
         }
         catch
         {
-            HMLog("Error encoding load results \(error)");
+            HMLog("Error encoding load results \(error)", logLevel: .Error);
             return nil;
         }
     }

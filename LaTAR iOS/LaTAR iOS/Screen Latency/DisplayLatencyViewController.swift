@@ -32,7 +32,7 @@ class DisplayLatencyViewController: LatarViewController {
             let response_data:Data = response.body?.data(using: .utf8)
         else
         {
-            HMLog("Error! Display Latency could not decode count and interval values");
+            HMLog("Error! Display Latency could not decode count and interval values", logLevel: .Error);
             return;
         }
         do
@@ -47,7 +47,7 @@ class DisplayLatencyViewController: LatarViewController {
         }
         catch
         {
-            HMLog("Error trying to decode response data: \(error) \(response)");
+            HMLog("Error trying to decode response data: \(error) \(response)", logLevel: .Error);
         }
         
     }
