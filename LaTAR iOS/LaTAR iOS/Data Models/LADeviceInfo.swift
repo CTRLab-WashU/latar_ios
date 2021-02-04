@@ -1,9 +1,7 @@
 //
-//  LADeviceInfo.swift
+// LADeviceInfo.swift
 //
-//  Created by Michael Votaw on 11/11/19.
-//  Copyright © 2019 healthyMedium. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 import UIKit

@@ -1,6 +1,7 @@
 //
-//  LaTARSocket.swift
+// LaTARSocket.swift
 //
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 import Socket

@@ -1,10 +1,7 @@
 //
-//  LoadParameters.swift
-//  LaTAR iOS
+// LoadParameters.swift
 //
-//  Created by Michael Votaw on 5/13/20.
-//  Copyright © 2020 healthyMedium. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 

@@ -1,10 +1,7 @@
 //
-//  LATouch.swift
-//  LaTAR iOS
+// LATouch.swift
 //
-//  Created by Michael Votaw on 1/20/20.
-//  Copyright © 2020 healthyMedium. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 import UIKit

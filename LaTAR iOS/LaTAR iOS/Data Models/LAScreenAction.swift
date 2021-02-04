@@ -1,10 +1,7 @@
 //
-//  LAScreenAction.swift
-//  LaTAR iOS
+// LAScreenAction.swift
 //
-//  Created by Michael Votaw on 2/19/20.
-//  Copyright © 2020 healthyMedium. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 import UIKit

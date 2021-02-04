@@ -1,5 +1,6 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+// LaTAR iOS-Bridging-Header.h
 //
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 #include "matrix_math.h"

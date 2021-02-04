@@ -1,13 +1,9 @@
 //
-//  SocketResponse.swift
-//  cameraball
+// SocketResponse.swift
 //
-//  Created by Michael Votaw on 12/12/18.
-//  Copyright © 2018 happyMedum. All rights reserved.
-//
-// This is a convenience container for a Cameraball API response.
-// The response_data structure should be as follows:
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
+// The response_data structure should be as follows:
 //  soh     cmd     ctl     body        stx        comment      etx     eot
 //  0x01                                0x02                    0x03    0x04
 //

@@ -1,10 +1,7 @@
 //
-//  UDPSocket.swift
-//  cameraball
+// UDPSocket.swift
 //
-//  Created by Spencer King on 9/26/18.
-//  Copyright © 2018 happyMedum. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 import Socket

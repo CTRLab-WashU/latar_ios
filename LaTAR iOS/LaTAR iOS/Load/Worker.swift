@@ -1,10 +1,7 @@
 //
-//  Worker.swift
-//  LaTAR iOS
+// Worker.swift
 //
-//  Created by Michael Votaw on 5/14/20.
-//  Copyright © 2020 healthyMedium. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 

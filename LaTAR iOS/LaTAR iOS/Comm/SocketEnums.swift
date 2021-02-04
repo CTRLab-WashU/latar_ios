@@ -1,10 +1,7 @@
 //
-//  SocketEnums.swift
-//  cameraball
+// SocketEnums.swift
 //
-//  Created by Michael Votaw on 12/12/18.
-//  Copyright © 2018 happyMedum. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
 import Foundation
 

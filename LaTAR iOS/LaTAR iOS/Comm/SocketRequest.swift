@@ -1,12 +1,8 @@
 //
-//  SocketRequest.swift
-//  cameraball
+// SocketRequest.swift
 //
-//  Created by Michael Votaw on 12/11/18.
-//  Copyright © 2018 happyMedum. All rights reserved.
-//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
 
-// This is a convenience container for a Cameraball API request.
 // The request_data structure should be as follows:
 
 //  soh     cmd     ctl     body        stx        comment      etx     eot
