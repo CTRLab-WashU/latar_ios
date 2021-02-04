@@ -1,0 +1,52 @@
+//
+// TapLatencyViewController.swift
+//
+// Copyright (c) 2021 Cognitive Technology Research Laboratory (CTRLab)
+
+import UIKit
+
+class TapLatencyViewController: LatarViewController {
+
+    public var count:Int = 0;
+    public var interval:Int = 0;
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+          
+        LaTARSocket.shared.acknowledgeCommand(.TAP_START);
+    }
+    
+    
+    @objc override func handleStart(notification: Notification?)
+    {
+        // TODO: do we need to do anything when we start?
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let e = event
+        {
+            self.processEvent(e);
+            count += 1;
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let e = event
+//        {
+//            self.processEvent(e);
+//        }
+    }
+    
+    func processEvent(_ event:UIEvent)
+    {
+        guard let touch = event.allTouches?.first else { return; }
+        
+        let actionTime = DeviceClock.convertToOffsetTime(event.timestamp);
+        let callbackTime = DeviceClock.getCurrentTime();
+        
+        let t = LATouch(index: self.count, actionTime: actionTime, callbackTime: callbackTime, touchPhase: touch.phase, touchRadius: touch.majorRadius);
+        
+        LaTARSocket.shared.sendTouch(t);
+    }
+    
+}
